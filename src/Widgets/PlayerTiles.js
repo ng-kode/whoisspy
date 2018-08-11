@@ -10,21 +10,17 @@ const Tile = ({ player, onPress }) => (
     </TouchableOpacity>
 )
 
-const PlayerTiles = ({ getPlayers, onPress }) => {
-    const players = getPlayers();
-    console.warn(players);
-    return (
-        <View style={styles.tilesWrapper}>
-            {players.map(player => 
-                <Tile
-                    key={JSON.stringify(player)}
-                    player={player}
-                    onPress={onPress}
-                />
-            )}
-        </View>
-    )
-};
+const PlayerTiles = ({ players, onPress }) => (
+    <View style={styles.tilesWrapper}>
+        {players.map(player => 
+            <Tile
+                key={JSON.stringify(player)}
+                player={player}
+                onPress={onPress}
+            />
+        )}
+    </View>
+);
 
 const styles = StyleSheet.create({
     tilesWrapper: {

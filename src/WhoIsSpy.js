@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import Header from "./Header";
 import Core from "./Core";
 import Footer from "./Footer";
@@ -14,8 +14,8 @@ class WhoIsSpy extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            core: this.rs,
-            footer: <View/>,
+            core: "rs",
+            footer: "nothing",
             selectedCatIds: [],
             numPlayers: 6,
             numSpies:  2,
@@ -32,83 +32,108 @@ class WhoIsSpy extends Component {
     /************************************************************
      *                        Core
      ************************************************************/
-    rs = (
-        <RoundSettings
-            ref={node => this.roundSettingsNode = node}
-            getNumPlayers={() => this.state.numPlayers}
-            getNumSpies={() => this.state.numSpies}
-            onSelectCatClick={() => this.switchToCat()} 
-        />
-    )
+    _renderCore = () => {
+        const widgets = {
+            "rs": <RoundSettings
+                numSpies={this.state.numSpies}
+                numPlayers={this.state.numPlayers}
+                setNumSpies={(sign) => this.setNumSpies(sign)}
+                setNumPlayers={val => this.setNumPlayers(val)}
+                onSelectCatClick={this.switchToCat} 
+            />,
+            "cat": <CategoryTiles 
+                ref={node => this.catTilesNode = node} 
+                selectedCatIds={this.state.selectedCatIds}
+            />,
+            "playerTiles": <PlayerTiles
+                players={this.state.players}
+                onPress={() => console.warn('Player Press')}
+            />
+        }
 
-    catTiles = (
-        <CategoryTiles 
-            ref={node => this.catTilesNode = node} 
-            getSelectedCatIds={() => this.state.selectedCatIds}
-        />
-    )
+        if (typeof widgets[this.state.core] === 'undefined') {
+            return <Text style={{fontSize: 24}}>
+                Plz provide a valid state for "core": 
+                enum({`${JSON.stringify(Object.keys(widgets))}`})
+            </Text>
+        }
 
-    playerTiles = (
-        <PlayerTiles
-            getPlayers={() => this.state.players}
-            onPress={() => console.warn('Player Press')}
-        />
-    )
+        return widgets[this.state.core]
+    }
     
     /************************************************************
      *                        Footer
      ************************************************************/
-    landingNextBtn = (
-        <LandingNextBtn
-            onPress={() => this.onLandingNextClick()}
-        />
-    )
+    _renderFooter = () => {
+        const widgets = {
+            "landingNextBtn": <LandingNextBtn
+                onPress={this.onLandingNextClick}
+            />,
+            "categoryControls": <CategoryControls
+                onOkayPress={this.onConfirmCatClick}
+                onCancelPress={this.onCancelCatClick}
+            />,
+            "playerTilesControls": <Text>To be done</Text>,
+            "nothing": <View/>
+        }
 
-    categoryControls = (
-        <CategoryControls
-            onOkayPress={() => this.onConfirmCatClick()}
-            onCancelPress={() => this.onCancelCatClick()}
-        />
-    )
+        if (typeof widgets[this.state.footer] === 'undefined') {
+            return <Text style={{fontSize: 24}}>
+                Plz provide a valid state for "core": 
+                enum({`${JSON.stringify(Object.keys(widgets))}`})
+            </Text>
+        }
+
+        return widgets[this.state.footer]
+    }
 
     /************************************************************
      *                        Handlers
      ************************************************************/
     switchToCat = () => {
         this.setState({ 
-            core: this.catTiles,
-            footer: this.categoryControls,
+            core: "cat",
+            footer: "categoryControls",
          })
     }
 
     onConfirmCatClick = () => {
         this.setState({
-            core: this.rs,            
+            core: "rs",            
             selectedCatIds: this.catTilesNode.getSelectedIds()
         }, () => {
             this.setState({
                 footer: this.state.selectedCatIds.length !== 0
-                    ? this.landingNextBtn
-                    : <View/>,
+                    ? "landingNextBtn"
+                    : "nothing",
             })
         })
     }
 
     onCancelCatClick = () => {
         this.setState({
-            core: this.rs,
-            footer: this.landingNextBtn,
+            core: "rs",
+            footer: "landingNextBtn",
         }, () => {
             this.setState({
                 footer: this.state.selectedCatIds.length !== 0
-                    ? this.landingNextBtn
-                    : <View/>,
+                    ? "landingNextBtn"
+                    : "nothing",
             })
         })
     }
 
+    setNumSpies = sign => {
+        // TODO: Toast for invalid values
+        this.setState({ numSpies: this.state.numSpies + parseInt(sign + 1) });
+    }
+
+    setNumPlayers = numPlayers => {
+        this.setState({ numPlayers });
+    }
+
     onLandingNextClick = () => {
-        const { numPlayers, numSpies } = this.roundSettingsNode.getPlayersConfig();
+        const { numPlayers, numSpies } = this.state;
         let players = Array(numPlayers).fill().map(_ => {
             return {
                 role: 'c',
@@ -127,13 +152,11 @@ class WhoIsSpy extends Component {
         players = players.map((p, i) => ({ ...p, name: `Player ${i}` }));
 
         this.setState({
-            numPlayers,
-            numSpies,
             players,
         }, () => {
             this.setState({
-                core: this.playerTiles,
-                footer: this.playerTilesControls,
+                core: "playerTiles",
+                footer: "playerTilesControls",
             });
         });
     }
@@ -142,18 +165,17 @@ class WhoIsSpy extends Component {
      *                        Render
      ************************************************************/
     render() {
-        const {
-            core,
-            footer,
-        } = this.state;
-
         return (
             <View style={styles.container}>
                 <Header title={
                     JSON.stringify(this.state.players)
                 } />
-                <Core body={core} />
-                <Footer body={footer} />
+                <Core>
+                    {this._renderCore()}
+                </Core>
+                <Footer>
+                    {this._renderFooter()}
+                </Footer>
             </View>
         )
     }

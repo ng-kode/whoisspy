@@ -35,7 +35,7 @@ const Tile = ({ name, isLastTile, onPress }) => (
 
 class CategoryTiles extends Component {
     state = {
-        selectedIds: this.props.getSelectedCatIds()
+        selectedIds: this.props.selectedCatIds
     }
 
     getSelectedIds = () => this.state.selectedIds;
@@ -55,9 +55,9 @@ class CategoryTiles extends Component {
     render() {
         return (
             <View style={styles.tilesWrapper}>
-                <Tile
+                {/* <Tile
                     name={this.state.selectedIds}
-                />
+                /> */}
                 {cats.map((cat, i) => 
                     <Tile 
                         key={cat.name}

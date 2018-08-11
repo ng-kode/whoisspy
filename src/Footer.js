@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import { View, StyleSheet } from 'react-native';
 import { DefaultButton } from "./CommonUI";
 
-const Footer = ({ body }) => (
+const Footer = ({ children }) => (
     <View style={styles.container}>
         <View style={styles.btnContainer}>
-            {body}
+            {children}
         </View>
     </View>
 );
