@@ -1,10 +1,10 @@
 import React from 'react';
 import { DefaultButton } from '../CommonUI';
 
-const LandingNextBtn = () => (
+const LandingNextBtn = ({ onPress }) => (
     <DefaultButton
         title="GO"
-        onPress={() => console.warn("GO")}
+        onPress={onPress}
     />
 );
 

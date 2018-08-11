@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from 'react-native';
 
-const Header = ({ body }) => (
+const Header = ({ title }) => (
     <View style={styles.container}>
         <Text>誰是臥底</Text>
-        <Text>{body}</Text>
+        <Text>{title}</Text>
     </View>
 );
 

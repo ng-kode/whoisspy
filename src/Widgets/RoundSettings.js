@@ -1,34 +1,60 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, Slider, StyleSheet } from 'react-native';
 import { DefaultButton, FloatingButton } from '../CommonUI';
 
-const RoundSettings = ({ onSelectCatClick }) => (
-    <View>
-        <DefaultButton
-            title="選擇種類"
-            onPress={onSelectCatClick}
-        />
+class RoundSettings extends Component {
+    state = {
+        numPlayers: this.props.getNumPlayers(),
+        numSpies:  this.props.getNumSpies(),
+    }
 
-        <Text>遊玩人數</Text>
-        <Slider
-            maximumValue={10}
-            minimumValue={4}
-            step={1}
-        />
+    getPlayersConfig = () => this.state;
+    
+    setNumPlayers = numPlayers =>
+        this.setState({ numPlayers });
 
-        <View style={styles.numSpyContainer}>
-            <Text>臥底人數: {6}</Text>
-            <FloatingButton
-                title="+"
-                onPress={() => console.warn("Add Spy !")}
-            />
-            <FloatingButton
-                title="-"
-                onPress={() => console.warn("Remove Spy !")}
-            />
-        </View>
-    </View>
-);
+    setNumSpies = sign =>
+        this.setState({ numSpies: this.state.numSpies + parseInt(sign + 1) });
+
+    render() {
+        const {
+            onSelectCatClick
+        } = this.props;
+
+        return (
+            <View>
+                <DefaultButton
+                    title="選擇種類"
+                    onPress={onSelectCatClick}
+                />
+        
+                <Text>遊玩人數</Text>
+                <Slider
+                    maximumValue={10}
+                    minimumValue={4}
+                    value={6}
+                    step={1}
+                    onValueChange={this.setNumPlayers}
+                />
+        
+                <View style={styles.numSpyContainer}>
+                    <Text>臥底人數: {6}</Text>
+                    <FloatingButton
+                        title="+"
+                        onPress={() => this.setNumSpies("+")}
+                    />
+                    <FloatingButton
+                        title="-"
+                        onPress={() => this.setNumSpies("-")}
+                    />
+                </View>
+
+                <Text>{JSON.stringify(this.state)}</Text>
+            </View>
+        );
+    }
+} 
+
 
 const styles = StyleSheet.create({
     numSpyContainer: {

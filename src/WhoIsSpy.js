@@ -16,13 +16,28 @@ class WhoIsSpy extends Component {
             core: this.rs,
             footer: <View/>,
             selectedCatIds: [],
+            numPlayers: 6,
+            numSpies:  2,
         }
     }
 
-    // header
+    /************************************************************
+     *                        Header
+     ************************************************************/
+    headStuff = "TO BE DONE"
 
-    // core
-    rs = <RoundSettings onSelectCatClick={() => this.switchToCat()} />
+
+    /************************************************************
+     *                        Core
+     ************************************************************/
+    rs = (
+        <RoundSettings
+            ref={node => this.roundSettingsNode = node}
+            getNumPlayers={() => this.state.numPlayers}
+            getNumSpies={() => this.state.numSpies}
+            onSelectCatClick={() => this.switchToCat()} 
+        />
+    )
     catTiles = (
         <CategoryTiles 
             ref={node => this.catTilesNode = node} 
@@ -30,8 +45,14 @@ class WhoIsSpy extends Component {
         />
     )
     
-    // footer
-    landingNextBtn = <LandingNextBtn/>
+    /************************************************************
+     *                        Footer
+     ************************************************************/
+    landingNextBtn = (
+        <LandingNextBtn
+            onPress={() => this.onLandingNextClick()}
+        />
+    )
     categoryControls = (
         <CategoryControls
             onOkayPress={() => this.onConfirmCatClick()}
@@ -39,7 +60,9 @@ class WhoIsSpy extends Component {
         />
     )
 
-    // handlers
+    /************************************************************
+     *                        Handlers
+     ************************************************************/
     switchToCat = () => {
         this.setState({ 
             core: this.catTiles,
@@ -49,9 +72,14 @@ class WhoIsSpy extends Component {
 
     onConfirmCatClick = () => {
         this.setState({
-            core: this.rs,
-            footer: this.landingNextBtn,
+            core: this.rs,            
             selectedCatIds: this.catTilesNode.getSelectedIds()
+        }, () => {
+            this.setState({
+                footer: this.state.selectedCatIds.length !== 0
+                ? this.landingNextBtn
+                : <View/>,
+            })
         })
     }
 
@@ -59,10 +87,27 @@ class WhoIsSpy extends Component {
         this.setState({
             core: this.rs,
             footer: this.landingNextBtn,
+        }, () => {
+            this.setState({
+                footer: this.state.selectedCatIds.length !== 0
+                ? this.landingNextBtn
+                : <View/>,
+            })
         })
     }
 
-    // render
+    onLandingNextClick = () => {
+        const { numPlayers, numSpies } = this.roundSettingsNode.getPlayersConfig();
+
+        this.setState({
+            numPlayers,
+            numSpies,
+        })
+    }
+
+    /************************************************************
+     *                        Render
+     ************************************************************/
     render() {
         const {
             core,
@@ -71,7 +116,11 @@ class WhoIsSpy extends Component {
 
         return (
             <View style={styles.container}>
-                <Header body={JSON.stringify(this.state.selectedCatIds)} />
+                <Header title={
+                    JSON.stringify(this.state.selectedCatIds) + '\n' +
+                    JSON.stringify(this.state.numPlayers) + '\n' +
+                    JSON.stringify(this.state.numSpies)
+                } />
                 <Core body={core} />
                 <Footer body={footer} />
             </View>
