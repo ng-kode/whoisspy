@@ -8,6 +8,7 @@ import {
     CategoryTiles, 
     LandingNextBtn,
     CategoryControls,
+    PlayerTiles,
 } from "./Widgets";
 class WhoIsSpy extends Component {
     constructor(props) {
@@ -18,6 +19,7 @@ class WhoIsSpy extends Component {
             selectedCatIds: [],
             numPlayers: 6,
             numSpies:  2,
+            players: [],
         }
     }
 
@@ -38,10 +40,18 @@ class WhoIsSpy extends Component {
             onSelectCatClick={() => this.switchToCat()} 
         />
     )
+
     catTiles = (
         <CategoryTiles 
             ref={node => this.catTilesNode = node} 
             getSelectedCatIds={() => this.state.selectedCatIds}
+        />
+    )
+
+    playerTiles = (
+        <PlayerTiles
+            getPlayers={() => this.state.players}
+            onPress={() => console.warn('Player Press')}
         />
     )
     
@@ -53,6 +63,7 @@ class WhoIsSpy extends Component {
             onPress={() => this.onLandingNextClick()}
         />
     )
+
     categoryControls = (
         <CategoryControls
             onOkayPress={() => this.onConfirmCatClick()}
@@ -77,8 +88,8 @@ class WhoIsSpy extends Component {
         }, () => {
             this.setState({
                 footer: this.state.selectedCatIds.length !== 0
-                ? this.landingNextBtn
-                : <View/>,
+                    ? this.landingNextBtn
+                    : <View/>,
             })
         })
     }
@@ -90,19 +101,41 @@ class WhoIsSpy extends Component {
         }, () => {
             this.setState({
                 footer: this.state.selectedCatIds.length !== 0
-                ? this.landingNextBtn
-                : <View/>,
+                    ? this.landingNextBtn
+                    : <View/>,
             })
         })
     }
 
     onLandingNextClick = () => {
         const { numPlayers, numSpies } = this.roundSettingsNode.getPlayersConfig();
+        let players = Array(numPlayers).fill().map(_ => {
+            return {
+                role: 'c',
+                word: '字字字字',
+                alive: true,
+                photoPath: '',
+            }
+        });
+
+        while (players.filter(p => p.role === 's').length !== numSpies) {
+            const spyIdx = getRandomInt(numPlayers);
+            players[spyIdx].role = 's';
+        };
+
+        players = shuffle(players);
+        players = players.map((p, i) => ({ ...p, name: `Player ${i}` }));
 
         this.setState({
             numPlayers,
             numSpies,
-        })
+            players,
+        }, () => {
+            this.setState({
+                core: this.playerTiles,
+                footer: this.playerTilesControls,
+            });
+        });
     }
 
     /************************************************************
@@ -117,9 +150,7 @@ class WhoIsSpy extends Component {
         return (
             <View style={styles.container}>
                 <Header title={
-                    JSON.stringify(this.state.selectedCatIds) + '\n' +
-                    JSON.stringify(this.state.numPlayers) + '\n' +
-                    JSON.stringify(this.state.numSpies)
+                    JSON.stringify(this.state.players)
                 } />
                 <Core body={core} />
                 <Footer body={footer} />
@@ -139,3 +170,16 @@ const styles = StyleSheet.create({
 })
 
 export default WhoIsSpy;
+
+function getRandomInt(max) {
+return Math.floor(Math.random() * Math.floor(max));
+}
+
+// https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
+function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
