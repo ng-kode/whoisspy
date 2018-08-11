@@ -1,0 +1,3 @@
+rootProject.name = 'whoisspy'
+
+include ':app'
