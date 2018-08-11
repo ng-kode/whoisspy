@@ -9,7 +9,10 @@ import {
     LandingNextBtn,
     CategoryControls,
     PlayerTiles,
+    PlayerTilesControls,
+    PlayerModal,
 } from "./Widgets";
+
 class WhoIsSpy extends Component {
     constructor(props) {
         super(props);
@@ -20,6 +23,8 @@ class WhoIsSpy extends Component {
             numPlayers: 6,
             numSpies:  2,
             players: [],
+            showGuess: false,
+            playerModalVisible: false,
         }
     }
 
@@ -33,6 +38,7 @@ class WhoIsSpy extends Component {
      *                        Core
      ************************************************************/
     _renderCore = () => {
+        // available widgets
         const widgets = {
             "rs": <RoundSettings
                 numSpies={this.state.numSpies}
@@ -47,10 +53,11 @@ class WhoIsSpy extends Component {
             />,
             "playerTiles": <PlayerTiles
                 players={this.state.players}
-                onPress={() => console.warn('Player Press')}
+                onTilePress={() => this.setState({ playerModalVisible: true })}
             />
         }
 
+        // Error handling
         if (typeof widgets[this.state.core] === 'undefined') {
             return <Text style={{fontSize: 24}}>
                 Plz provide a valid state for "core": 
@@ -58,6 +65,7 @@ class WhoIsSpy extends Component {
             </Text>
         }
 
+        // return widget by state
         return widgets[this.state.core]
     }
     
@@ -65,6 +73,7 @@ class WhoIsSpy extends Component {
      *                        Footer
      ************************************************************/
     _renderFooter = () => {
+        // available widgets
         const widgets = {
             "landingNextBtn": <LandingNextBtn
                 onPress={this.onLandingNextClick}
@@ -73,17 +82,23 @@ class WhoIsSpy extends Component {
                 onOkayPress={this.onConfirmCatClick}
                 onCancelPress={this.onCancelCatClick}
             />,
-            "playerTilesControls": <Text>To be done</Text>,
+            "playerTilesControls": <PlayerTilesControls
+                onResetPress={() => {}}
+                showGuess={(this.state.showGuess)}
+                onGuessPress={() => {}}
+            />,
             "nothing": <View/>
         }
 
+        // Error handling
         if (typeof widgets[this.state.footer] === 'undefined') {
             return <Text style={{fontSize: 24}}>
-                Plz provide a valid state for "core": 
+                Plz provide a valid state for "footer": 
                 enum({`${JSON.stringify(Object.keys(widgets))}`})
             </Text>
         }
 
+        // return widget by state
         return widgets[this.state.footer]
     }
 
@@ -149,7 +164,7 @@ class WhoIsSpy extends Component {
         };
 
         players = shuffle(players);
-        players = players.map((p, i) => ({ ...p, name: `Player ${i}` }));
+        players = players.map((p, i) => ({ ...p, name: `Player ${i + 1}` }));
 
         this.setState({
             players,
@@ -176,6 +191,11 @@ class WhoIsSpy extends Component {
                 <Footer>
                     {this._renderFooter()}
                 </Footer>
+
+                <PlayerModal 
+                    modalVisible={this.state.playerModalVisible}
+                    onBackdropPress={() => this.setState({ playerModalVisible: false })}
+                />
             </View>
         )
     }

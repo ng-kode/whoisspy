@@ -10,13 +10,13 @@ const Tile = ({ player, onPress }) => (
     </TouchableOpacity>
 )
 
-const PlayerTiles = ({ players, onPress }) => (
+const PlayerTiles = ({ players, onTilePress }) => (
     <View style={styles.tilesWrapper}>
         {players.map(player => 
             <Tile
                 key={JSON.stringify(player)}
                 player={player}
-                onPress={onPress}
+                onPress={onTilePress}
             />
         )}
     </View>
