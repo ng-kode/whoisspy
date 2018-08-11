@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Button, StyleSheet } from 'react-native';
 
 const DefaultButton = (props) => (
-    <View style={[styles.btnContainer, props.btnContainer]}>
+    <View style={[styles.btnContainer, props.btnContainerStyle]}>
         <Button
             {...props}
             title={props.title}
