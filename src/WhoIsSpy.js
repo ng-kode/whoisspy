@@ -10,8 +10,9 @@ import {
     CategoryControls,
     PlayerTiles,
     PlayerTilesControls,
-    PlayerModal,
+    WordThenPhoto,
 } from "./Widgets";
+import { DefaultModal } from "./CommonUI";
 
 class WhoIsSpy extends Component {
     constructor(props) {
@@ -19,12 +20,14 @@ class WhoIsSpy extends Component {
         this.state = {
             core: "rs",
             footer: "nothing",
+            modalContent: "nothing",
             selectedCatIds: [],
             numPlayers: 6,
             numSpies:  2,
             players: [],
             showGuess: false,
-            playerModalVisible: false,
+            modalVisible: false,
+            modalPlayerId: null,
         }
     }
 
@@ -53,7 +56,7 @@ class WhoIsSpy extends Component {
             />,
             "playerTiles": <PlayerTiles
                 players={this.state.players}
-                onTilePress={() => this.setState({ playerModalVisible: true })}
+                onTilePress={(id) => this.onTilePress(id)}
             />
         }
 
@@ -103,6 +106,34 @@ class WhoIsSpy extends Component {
     }
 
     /************************************************************
+     *                        Modal
+     ************************************************************/
+    _renderModalContent = () => {
+        if (!this.state.modalVisible) {
+            return
+        }
+
+        const widgets = {
+            "wordThenPhoto": <WordThenPhoto
+                word={this.state.players.filter(p => p.id === this.state.modalPlayerId)[0].word}
+                dismissModal={() => this.setState({ modalVisible: false })}
+            />,
+            "nothing": <View/>
+        }
+
+        // Error handling
+        if (typeof widgets[this.state.modalContent] === 'undefined') {
+            return <Text style={{fontSize: 24}}>
+                Plz provide a valid state for "footer": 
+                enum({`${JSON.stringify(Object.keys(widgets))}`})
+            </Text>
+        }
+
+        // return widget by state
+        return widgets[this.state.modalContent]
+    }
+
+    /************************************************************
      *                        Handlers
      ************************************************************/
     switchToCat = () => {
@@ -149,10 +180,10 @@ class WhoIsSpy extends Component {
 
     onLandingNextClick = () => {
         const { numPlayers, numSpies } = this.state;
-        let players = Array(numPlayers).fill().map(_ => {
+        let players = Array(numPlayers).fill().map((_, i) => {
             return {
                 role: 'c',
-                word: '字字字字',
+                word: `字字字字`,
                 alive: true,
                 photoPath: '',
             }
@@ -164,7 +195,14 @@ class WhoIsSpy extends Component {
         };
 
         players = shuffle(players);
-        players = players.map((p, i) => ({ ...p, name: `Player ${i + 1}` }));
+        players = players.map((p, i) => {
+            return { 
+                ...p, 
+                id: i,
+                name: `Player ${i + 1}`,
+                word: `${p.role}字字字${i}`,
+            }
+        });
 
         this.setState({
             players,
@@ -176,6 +214,15 @@ class WhoIsSpy extends Component {
         });
     }
 
+    onTilePress = id => {
+        console.log(id)
+        this.setState({ 
+            modalVisible: true,
+            modalPlayerId: id,
+            modalContent: "wordThenPhoto",
+        })
+    }
+
     /************************************************************
      *                        Render
      ************************************************************/
@@ -185,16 +232,15 @@ class WhoIsSpy extends Component {
                 <Header title={
                     JSON.stringify(this.state.players)
                 } />
-                <Core>
-                    {this._renderCore()}
-                </Core>
-                <Footer>
-                    {this._renderFooter()}
-                </Footer>
 
-                <PlayerModal 
-                    modalVisible={this.state.playerModalVisible}
-                    onBackdropPress={() => this.setState({ playerModalVisible: false })}
+                <Core children={this._renderCore()} />                                    
+
+                <Footer children={this._renderFooter()} />
+
+                <DefaultModal 
+                    modalVisible={this.state.modalVisible} 
+                    onBackdropPress={() => this.setState({ modalVisible: false })}
+                    children={this._renderModalContent()}
                 />
             </View>
         )

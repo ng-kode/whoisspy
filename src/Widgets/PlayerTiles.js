@@ -1,23 +1,16 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const Tile = ({ player, onPress }) => (
-    <TouchableOpacity 
-        style={styles.tileContainer}
-        onPress={onPress}
-    >
-        <Text>{player.name}</Text>
-    </TouchableOpacity>
-)
-
 const PlayerTiles = ({ players, onTilePress }) => (
     <View style={styles.tilesWrapper}>
-        {players.map(player => 
-            <Tile
+        {players.map(player =>
+            <TouchableOpacity
                 key={JSON.stringify(player)}
-                player={player}
-                onPress={onTilePress}
-            />
+                style={styles.tileContainer}
+                onPress={() => onTilePress(player.id)}
+            >
+                <Text>{player.name}</Text>
+            </TouchableOpacity>
         )}
     </View>
 );

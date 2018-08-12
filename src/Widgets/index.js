@@ -4,7 +4,7 @@ import LandingNextBtn from "./LandingNextBtn";
 import CategoryControls from "./CategoryControls";
 import PlayerTiles from "./PlayerTiles";
 import PlayerTilesControls from "./PlayerTilesControls";
-import PlayerModal from "./PlayerModal";
+import WordThenPhoto from "./WordThenPhoto";
 
 export {
     RoundSettings,
@@ -13,5 +13,5 @@ export {
     CategoryControls,
     PlayerTiles,
     PlayerTilesControls,
-    PlayerModal,
+    WordThenPhoto,
 }
