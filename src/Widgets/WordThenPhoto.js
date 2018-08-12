@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, Button, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, Button, Image } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import { DEFAULT_AVATAR } from '../WhoIsSpy';
 
 class WordThenPhoto extends Component {
     state = {
         showCamera: false,
+        isRetake: this.props.photoPath !== DEFAULT_AVATAR,
     }
 
     onBtnPress = async () => {
@@ -20,21 +22,35 @@ class WordThenPhoto extends Component {
 
     render() {
         const {
-            word
+            word,
+            photoPath,
+            dismissModal,
         } = this.props;
 
         const {
             showCamera,
-        } = this.state;
+            isRetake,
+        } = this.state;    
 
         return (
             <View style={{ flex: 1 }}>
                 <Text>請記下字詞</Text>
+
+                {!showCamera && (
+                    <View>
+                        <Text>{word}</Text>
+                        <Button
+                            title="已記下"
+                            onPress={this.onBtnPress}
+                        />
+                    </View>
+                )}
                 
-                {showCamera 
-                    ? (
+                {(showCamera && !isRetake)
+                    && (
                         <View style={{ flex: 1 }}>
-                           <RNCamera
+                            
+                            <RNCamera
                                 ref={ref => {
                                     this.camera = ref;
                                 }}
@@ -43,15 +59,34 @@ class WordThenPhoto extends Component {
                                 permissionDialogTitle={'Permission to use camera'}
                                 permissionDialogMessage={'We need your permission to use your camera phone'}
                             />
+                            
+                            <Button
+                                title="拍照"
+                                onPress={this.onBtnPress}
+                            />
                         </View>
                     )
-                    : <Text>{word}</Text>
                 }
 
-                <Button
-                    title={showCamera ? "拍照" : "已記下"}
-                    onPress={this.onBtnPress}
-                />
+                {(showCamera && isRetake)
+                    && (
+                        <View>
+                            <Text>Retake photo ?</Text>
+                            <Image
+                                style={{width: 50, height: 50}}
+                                source={photoPath}
+                            />
+                            <Button
+                                title="YES"
+                                onPress={() => this.setState({ showCamera: true, isRetake: false })}
+                            />
+                            <Button
+                                title="NO"
+                                onPress={dismissModal}
+                            />
+                        </View>
+                    )
+                }
             </View>
         );
     }

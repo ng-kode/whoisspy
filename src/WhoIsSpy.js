@@ -14,6 +14,8 @@ import {
 } from "./Widgets";
 import { DefaultModal } from "./CommonUI";
 
+export const DEFAULT_AVATAR = ""
+
 class WhoIsSpy extends Component {
     constructor(props) {
         super(props);
@@ -28,6 +30,7 @@ class WhoIsSpy extends Component {
             showGuess: false,
             modalVisible: false,
             modalPlayerId: null,
+            roundNum: 0,
         }
     }
 
@@ -119,10 +122,14 @@ class WhoIsSpy extends Component {
             </Text>
         }
 
+        const player = this.state.players.filter(p => p.id === this.state.modalPlayerId)[0];
+
         const widgets = {
             "wordThenPhoto": <WordThenPhoto
-                word={this.state.players.filter(p => p.id === this.state.modalPlayerId)[0].word}
+                word={player.word}
+                photoPath={player.photoPath}
                 onPhotoPathRetrieved={uri => this.onPhotoTaken(uri)}
+                dismissModal={this.dismissModal}
             />,
             "nothing": <View/>
         }
@@ -199,7 +206,7 @@ class WhoIsSpy extends Component {
                 role: 'c',
                 word: `字字字字`,
                 alive: true,
-                photoPath: '',
+                photoPath: DEFAULT_AVATAR,
                 wordSeen: false,
             }
         });
@@ -230,11 +237,15 @@ class WhoIsSpy extends Component {
     }
 
     onTilePress = id => {
-        this.setState({ 
-            modalVisible: true,
-            modalPlayerId: id,
-            modalContent: "wordThenPhoto",
-        })
+        if (this.state.roundNum === 0) {
+            this.setState({ 
+                modalVisible: true,
+                modalPlayerId: id,
+                modalContent: "wordThenPhoto",
+            })    
+        } else {
+            // TODO: next round stuff
+        }
     }
 
     onPhotoTaken = uri => {
@@ -249,7 +260,7 @@ class WhoIsSpy extends Component {
             wordSeen: true,            
         }
 
-        const showGuess = players.every(p => p.wordSeen && p.photoPath !== "");
+        const showGuess = players.every(p => p.wordSeen && p.photoPath !== DEFAULT_AVATAR);
 
         this.setState({
             players,

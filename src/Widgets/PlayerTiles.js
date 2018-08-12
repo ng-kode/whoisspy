@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { DEFAULT_AVATAR } from '../WhoIsSpy';
 
 const PlayerTiles = ({ players, onTilePress }) => (
     <View style={styles.tilesWrapper}>
@@ -10,7 +11,7 @@ const PlayerTiles = ({ players, onTilePress }) => (
                 onPress={() => onTilePress(player.id)}
             >
                 <Text>{player.name}</Text>
-                {player.photoPath !== "" && <Image
+                {player.photoPath !== DEFAULT_AVATAR && <Image
                     style={{width: 50, height: 50}}
                     source={player.photoPath}
                 />}
