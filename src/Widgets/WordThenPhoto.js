@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import { RNCamera } from 'react-native-camera';
 
 class WordThenPhoto extends Component {
     state = {
         showCamera: false
     }
 
-    onBtnPress = () => {
+    onBtnPress = async () => {
         if (this.state.showCamera) {
-            // TODO: async takePhoto
+            const options = { quality: 0.5, base64: true };
+            const data = await this.camera.takePictureAsync(options);
+            console.log(data.uri);
             this.props.dismissModal()
         } else {
             this.setState({ showCamera: true })
@@ -25,11 +28,26 @@ class WordThenPhoto extends Component {
         } = this.state;
 
         return (
-            <View>                
+            <View style={{ flex: 1 }}>
                 <Text>請記下字詞</Text>
                 
                 {showCamera 
-                    ? <Text>Camera will be here</Text>
+                    ? (
+                        <View style={{ flex: 1 }}>
+                            <RNCamera
+                                ref={ref => {
+                                    this.camera = ref;
+                                }}
+                                style = {{ flex: 1 }}
+                                type={RNCamera.Constants.Type.front}
+                                permissionDialogTitle={'Permission to use camera'}
+                                permissionDialogMessage={'We need your permission to use your camera phone'}
+                            />
+                            <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center',}}>
+                                
+                            </View>
+                        </View>
+                    )
                     : <Text>{word}</Text>
                 }
 
@@ -40,6 +58,6 @@ class WordThenPhoto extends Component {
             </View>
         );
     }
-} 
+}
 
 export default WordThenPhoto;

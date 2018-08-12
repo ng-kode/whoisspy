@@ -11,6 +11,7 @@ import {
     PlayerTiles,
     PlayerTilesControls,
     WordThenPhoto,
+    Cam
 } from "./Widgets";
 import { DefaultModal } from "./CommonUI";
 
@@ -112,6 +113,12 @@ class WhoIsSpy extends Component {
         if (!this.state.modalVisible) {
             return
         }
+        
+        if (this.state.modalPlayerId === null) {
+            return <Text style={{fontSize: 24}}>
+                Plz setState for "modalPlayerId"
+            </Text>
+        }
 
         const widgets = {
             "wordThenPhoto": <WordThenPhoto
@@ -121,10 +128,15 @@ class WhoIsSpy extends Component {
             "nothing": <View/>
         }
 
+        // const widgets = {
+        //     "wordThenPhoto": <Cam/>,
+        //     "nothing": <View/>
+        // }
+
         // Error handling
         if (typeof widgets[this.state.modalContent] === 'undefined') {
             return <Text style={{fontSize: 24}}>
-                Plz provide a valid state for "footer": 
+                Plz provide a valid state for "modalContent": 
                 enum({`${JSON.stringify(Object.keys(widgets))}`})
             </Text>
         }
@@ -186,6 +198,7 @@ class WhoIsSpy extends Component {
                 word: `字字字字`,
                 alive: true,
                 photoPath: '',
+                wordSeen: false,
             }
         });
 
@@ -215,7 +228,6 @@ class WhoIsSpy extends Component {
     }
 
     onTilePress = id => {
-        console.log(id)
         this.setState({ 
             modalVisible: true,
             modalPlayerId: id,
@@ -237,10 +249,10 @@ class WhoIsSpy extends Component {
 
                 <Footer children={this._renderFooter()} />
 
-                <DefaultModal 
-                    modalVisible={this.state.modalVisible} 
-                    onBackdropPress={() => this.setState({ modalVisible: false })}
+                <DefaultModal
                     children={this._renderModalContent()}
+                    modalVisible={this.state.modalVisible} 
+                    onBackdropPress={() => this.setState({ modalVisible: false })}                    
                 />
             </View>
         )

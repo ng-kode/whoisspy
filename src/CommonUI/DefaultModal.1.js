@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         // position: "absolute",
         // zIndex: 10,
-        alignSelf: "center",
+        // alignSelf: "center",
         // top: "25%",
         borderRadius: 10,
     }
