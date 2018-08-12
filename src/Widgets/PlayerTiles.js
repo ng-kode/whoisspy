@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
 const PlayerTiles = ({ players, onTilePress }) => (
     <View style={styles.tilesWrapper}>
@@ -10,6 +10,10 @@ const PlayerTiles = ({ players, onTilePress }) => (
                 onPress={() => onTilePress(player.id)}
             >
                 <Text>{player.name}</Text>
+                {player.photoPath !== "" && <Image
+                    style={{width: 50, height: 50}}
+                    source={player.photoPath}
+                />}
             </TouchableOpacity>
         )}
     </View>

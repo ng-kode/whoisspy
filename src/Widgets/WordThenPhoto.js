@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, ActivityIndicator } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 
 class WordThenPhoto extends Component {
     state = {
-        showCamera: false
+        showCamera: false,
     }
 
     onBtnPress = async () => {
@@ -12,7 +12,7 @@ class WordThenPhoto extends Component {
             const options = { quality: 0.5, base64: true };
             const data = await this.camera.takePictureAsync(options);
             console.log(data.uri);
-            this.props.dismissModal()
+            this.props.onPhotoPathRetrieved(data.uri);
         } else {
             this.setState({ showCamera: true })
         }
@@ -24,7 +24,7 @@ class WordThenPhoto extends Component {
         } = this.props;
 
         const {
-            showCamera
+            showCamera,
         } = this.state;
 
         return (
@@ -34,7 +34,7 @@ class WordThenPhoto extends Component {
                 {showCamera 
                     ? (
                         <View style={{ flex: 1 }}>
-                            <RNCamera
+                           <RNCamera
                                 ref={ref => {
                                     this.camera = ref;
                                 }}
@@ -43,9 +43,6 @@ class WordThenPhoto extends Component {
                                 permissionDialogTitle={'Permission to use camera'}
                                 permissionDialogMessage={'We need your permission to use your camera phone'}
                             />
-                            <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center',}}>
-                                
-                            </View>
                         </View>
                     )
                     : <Text>{word}</Text>

@@ -11,7 +11,6 @@ import {
     PlayerTiles,
     PlayerTilesControls,
     WordThenPhoto,
-    Cam
 } from "./Widgets";
 import { DefaultModal } from "./CommonUI";
 
@@ -123,15 +122,10 @@ class WhoIsSpy extends Component {
         const widgets = {
             "wordThenPhoto": <WordThenPhoto
                 word={this.state.players.filter(p => p.id === this.state.modalPlayerId)[0].word}
-                dismissModal={() => this.setState({ modalVisible: false })}
+                onPhotoPathRetrieved={uri => this.onPhotoTaken(uri)}
             />,
             "nothing": <View/>
         }
-
-        // const widgets = {
-        //     "wordThenPhoto": <Cam/>,
-        //     "nothing": <View/>
-        // }
 
         // Error handling
         if (typeof widgets[this.state.modalContent] === 'undefined') {
@@ -143,6 +137,14 @@ class WhoIsSpy extends Component {
 
         // return widget by state
         return widgets[this.state.modalContent]
+    }
+
+    dismissModal = () => {
+        this.setState({
+            modalVisible: false,
+            modalContent: "nothing",
+            modalPlayerId: null,
+        })
     }
 
     /************************************************************
@@ -235,6 +237,28 @@ class WhoIsSpy extends Component {
         })
     }
 
+    onPhotoTaken = uri => {
+        const {
+            players,
+            modalPlayerId
+        } = this.state;
+
+        players[modalPlayerId] = {
+            ...players[modalPlayerId],
+            photoPath: { uri },
+            wordSeen: true,            
+        }
+
+        const showGuess = players.every(p => p.wordSeen && p.photoPath !== "");
+
+        this.setState({
+            players,
+            showGuess,
+        }, () => {
+            this.dismissModal();
+        })
+    }
+
     /************************************************************
      *                        Render
      ************************************************************/
@@ -252,7 +276,7 @@ class WhoIsSpy extends Component {
                 <DefaultModal
                     children={this._renderModalContent()}
                     modalVisible={this.state.modalVisible} 
-                    onBackdropPress={() => this.setState({ modalVisible: false })}                    
+                    onBackdropPress={this.dismissModal}                    
                 />
             </View>
         )
