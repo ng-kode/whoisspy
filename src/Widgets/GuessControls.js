@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import { DefaultButton } from "../CommonUI";
 
 const GuessControls = () => (
     <View>
-        <Button
+        <DefaultButton
             title="RESET"
             onPress={() => {}}
         />

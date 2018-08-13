@@ -13,6 +13,10 @@ import {
     WordThenPhoto,
     GuessControls,
     KeywordOrKill,
+    SharePenaltyControls,
+    ContinueControls,
+    ContinueOrReset,
+    NextRoundWord,
 } from "./Widgets";
 import { DefaultModal } from "./CommonUI";
 
@@ -34,6 +38,7 @@ class WhoIsSpy extends Component {
             modalPlayerId: null,
             roundNum: 0,
             result: {},
+            showPenalty: false,
         }
     }
 
@@ -63,6 +68,8 @@ class WhoIsSpy extends Component {
             "playerTiles": <PlayerTiles
                 players={this.state.players}
                 onTilePress={(id) => this.onTilePress(id)}
+                showPenalty={this.state.showPenalty}
+                result={this.state.result}
             />
         }
 
@@ -93,10 +100,16 @@ class WhoIsSpy extends Component {
             />,
             "playerTilesControls": <PlayerTilesControls
                 onResetPress={() => {}}
-                showGuess={(this.state.showGuess)}
+                showGuess={this.state.showGuess}
                 onGuessPress={this.onGuessPress}
             />,
             "guessControls": <GuessControls/>,
+            "sharePenaltyControls": <SharePenaltyControls
+                onPenaltyPress={this.onPenaltyPress}
+            />,
+            "continueControls": <ContinueControls
+                onContinuePress={this.onContinuePress}
+            />,
             "nothing": <View/>
         }
 
@@ -120,28 +133,41 @@ class WhoIsSpy extends Component {
             return
         }
         
+        let widgets = {
+            "nothing": <View/>,
+        };
+
         if (this.state.modalPlayerId === null) {
-            return <Text style={{fontSize: 24}}>
-                Plz setState for "modalPlayerId"
-            </Text>
-        }
-
-        const player = this.state.players.filter(p => p.id === this.state.modalPlayerId)[0];
-
-        const widgets = {
-            "wordThenPhoto": <WordThenPhoto
-                word={player.word}
-                photoPath={player.photoPath}
-                onPhotoPathRetrieved={uri => this.onPhotoTaken(uri)}
-                dismissModal={this.dismissModal}
-            />,
-            "keywordOrKill": <KeywordOrKill
-                dismissModal={this.dismissModal}
-                word={player.word}
-                onKillPress={this.onKillPress}
-                photoPath={player.photoPath}
-            />,
-            "nothing": <View/>
+            widgets = {
+                ...widgets,
+                "continueOrReset": <ContinueOrReset
+                    onResetPress={() => {}}
+                    onContinuePress={this.toNextRound}
+                />        
+            }
+        } else {
+            const player = this.state.players.filter(p => p.id === this.state.modalPlayerId)[0];
+            widgets = {
+                ...widgets,
+                "wordThenPhoto": <WordThenPhoto
+                    word={player && player.word}
+                    photoPath={player && player.photoPath}
+                    onPhotoPathRetrieved={uri => this.onPhotoTaken(uri)}
+                    dismissModal={this.dismissModal}
+                />,
+                "keywordOrKill": <KeywordOrKill
+                    dismissModal={this.dismissModal}
+                    word={player && player.word}
+                    onKillPress={this.onKillPress}
+                    photoPath={player && player.photoPath}
+                />,
+                "continueOrReset": <ContinueOrReset
+                    onResetPress={() => {}}
+                    onContinuePress={this.toNextRound}
+                />,
+                "nextRoundWord": <NextRoundWord/>,
+                "nothing": <View/>
+            }
         }
 
         // Error handling
@@ -149,6 +175,7 @@ class WhoIsSpy extends Component {
             return <Text style={{fontSize: 24}}>
                 Plz provide a valid state for "modalContent": 
                 enum({`${JSON.stringify(Object.keys(widgets))}`})
+                for modalPlayerId is {this.state.modalPlayerId !== null && "not"} null
             </Text>
         }
 
@@ -213,7 +240,9 @@ class WhoIsSpy extends Component {
         let players = Array(numPlayers).fill().map((_, i) => {
             return {
                 role: 'c',
-                word: `字字字字`,
+                id: i,
+                name: `Player ${i + 1}`,
+                word: `字字字${i}`,
                 alive: true,
                 photoPath: DEFAULT_AVATAR,
                 wordSeen: false,
@@ -224,16 +253,6 @@ class WhoIsSpy extends Component {
             const spyIdx = getRandomInt(numPlayers);
             players[spyIdx].role = 's';
         };
-
-        players = shuffle(players);
-        players = players.map((p, i) => {
-            return { 
-                ...p, 
-                id: i,
-                name: `Player ${i + 1}`,
-                word: `${p.role}字字字${i}`,
-            }
-        });
 
         this.setState({
             players,
@@ -311,7 +330,8 @@ class WhoIsSpy extends Component {
                     winner: 's',
                     aliveSpies,
                     aliveNorm
-                }
+                },
+                footer: "sharePenaltyControls",
             })
         } else if (normWin) {
             this.setState({
@@ -319,7 +339,8 @@ class WhoIsSpy extends Component {
                     winner: 'c',
                     aliveSpies,
                     aliveNorm
-                }
+                },
+                footer: "sharePenaltyControls",
             })
         } else {
             this.setState({
@@ -331,6 +352,58 @@ class WhoIsSpy extends Component {
         }
 
         this.dismissModal();
+    }
+
+    onPenaltyPress = () => {
+        this.setState({
+            showPenalty: true,
+            footer: "continueControls",
+        })
+    }
+
+    onContinuePress = () => {
+        this.setState({
+            modalContent: "continueOrReset",
+            modalVisible: true,
+        })
+    }
+
+    toNextRound = () => {
+        let {
+            players,
+            numSpies,
+            numPlayers,
+        } = this.state;
+
+        players = players.map(p => {
+            return {
+                ...p,
+                role: 'c',
+                wordSeen: false,
+                alive: true,
+                word: `字字字Round${this.state.roundNum + 1}`
+            }
+        });
+
+        while (players.filter(p => p.role === 's').length !== numSpies) {
+            const spyIdx = getRandomInt(numPlayers);
+            players[spyIdx].role = 's';
+        };
+
+        this.setState({
+            players,
+            roundNum: this.state.roundNum + 1,
+        }, () => {
+            this.setState({
+                showGuess: false,
+                showPenalty: false,
+                result: {},
+                footer: "playerTilesControls",
+                modalContent: "nextRoundWord",
+            })
+
+            this.dismissModal();
+        })
     }
 
     /************************************************************

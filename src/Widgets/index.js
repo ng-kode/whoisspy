@@ -7,6 +7,10 @@ import PlayerTilesControls from "./PlayerTilesControls";
 import WordThenPhoto from "./WordThenPhoto";
 import GuessControls from "./GuessControls";
 import KeywordOrKill from "./KeywordOrKill";
+import SharePenaltyControls from "./SharePenaltyControls";
+import ContinueControls from "./ContinueControls";
+import ContinueOrReset from "./ContinueOrReset";
+import NextRoundWord from "./NextRoundWord";
 
 export {
     RoundSettings,
@@ -18,4 +22,8 @@ export {
     WordThenPhoto,
     GuessControls,
     KeywordOrKill,
+    SharePenaltyControls,
+    ContinueControls,
+    ContinueOrReset,
+    NextRoundWord,
 }

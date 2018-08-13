@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { DEFAULT_AVATAR } from '../WhoIsSpy';
 
-const PlayerTiles = ({ players, onTilePress }) => {
+const PlayerTiles = ({ players, onTilePress, showPenalty, result }) => {
     onPress = (id, alive) => {
         if (!alive) {
             return;
@@ -16,7 +16,11 @@ const PlayerTiles = ({ players, onTilePress }) => {
         {players.map(player =>
             <TouchableOpacity
                 key={JSON.stringify(player)}
-                style={[styles.tileContainer, !player.alive && { backgroundColor: "grey" }]}
+                style={[
+                    styles.tileContainer, 
+                    !player.alive && { backgroundColor: "grey" },
+                    (showPenalty && player.role !== result.winner) && { backgroundColor: "red" }
+                ]}
                 onPress={() => this.onPress(player.id, player.alive)}
             >
                 <Text>{player.name}</Text>
