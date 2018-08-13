@@ -5,6 +5,8 @@ import CategoryControls from "./CategoryControls";
 import PlayerTiles from "./PlayerTiles";
 import PlayerTilesControls from "./PlayerTilesControls";
 import WordThenPhoto from "./WordThenPhoto";
+import GuessControls from "./GuessControls";
+import KeywordOrKill from "./KeywordOrKill";
 
 export {
     RoundSettings,
@@ -14,4 +16,6 @@ export {
     PlayerTiles,
     PlayerTilesControls,
     WordThenPhoto,
+    GuessControls,
+    KeywordOrKill,
 }

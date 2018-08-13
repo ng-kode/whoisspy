@@ -11,6 +11,8 @@ import {
     PlayerTiles,
     PlayerTilesControls,
     WordThenPhoto,
+    GuessControls,
+    KeywordOrKill,
 } from "./Widgets";
 import { DefaultModal } from "./CommonUI";
 
@@ -31,6 +33,7 @@ class WhoIsSpy extends Component {
             modalVisible: false,
             modalPlayerId: null,
             roundNum: 0,
+            result: {},
         }
     }
 
@@ -91,8 +94,9 @@ class WhoIsSpy extends Component {
             "playerTilesControls": <PlayerTilesControls
                 onResetPress={() => {}}
                 showGuess={(this.state.showGuess)}
-                onGuessPress={() => {}}
+                onGuessPress={this.onGuessPress}
             />,
+            "guessControls": <GuessControls/>,
             "nothing": <View/>
         }
 
@@ -131,6 +135,12 @@ class WhoIsSpy extends Component {
                 onPhotoPathRetrieved={uri => this.onPhotoTaken(uri)}
                 dismissModal={this.dismissModal}
             />,
+            "keywordOrKill": <KeywordOrKill
+                dismissModal={this.dismissModal}
+                word={player.word}
+                onKillPress={this.onKillPress}
+                photoPath={player.photoPath}
+            />,
             "nothing": <View/>
         }
 
@@ -149,7 +159,6 @@ class WhoIsSpy extends Component {
     dismissModal = () => {
         this.setState({
             modalVisible: false,
-            modalContent: "nothing",
             modalPlayerId: null,
         })
     }
@@ -232,20 +241,16 @@ class WhoIsSpy extends Component {
             this.setState({
                 core: "playerTiles",
                 footer: "playerTilesControls",
+                modalContent: "wordThenPhoto"
             });
         });
     }
 
     onTilePress = id => {
-        if (this.state.roundNum === 0) {
-            this.setState({ 
-                modalVisible: true,
-                modalPlayerId: id,
-                modalContent: "wordThenPhoto",
-            })    
-        } else {
-            // TODO: next round stuff
-        }
+        this.setState({ 
+            modalVisible: true,
+            modalPlayerId: id,
+        })
     }
 
     onPhotoTaken = uri => {
@@ -270,6 +275,60 @@ class WhoIsSpy extends Component {
         })
     }
 
+    onGuessPress = () => {
+        this.setState({
+            footer: "guessControls",
+            modalContent: "keywordOrKill"
+        })
+    }
+
+    onKillPress = () => {
+        const {
+            players,
+            modalPlayerId
+        } = this.state;
+
+        players[modalPlayerId] = {
+            ...players[modalPlayerId],
+            alive: false,            
+        }
+
+        const aliveSpies = players.filter(p => p.role === 's' && p.alive).length;
+        const aliveNorm = players.filter(p => p.role === 'c' && p.alive).length;
+        console.log(aliveSpies);
+        console.log(aliveNorm);
+        
+        const spyWin = aliveSpies === aliveNorm;
+        const normWin = aliveSpies === 0;
+
+        if (spyWin) {
+            this.setState({
+                result : {
+                    winner: 's',
+                    aliveSpies,
+                    aliveNorm
+                }
+            })
+        } else if (normWin) {
+            this.setState({
+                result : {
+                    winner: 'c',
+                    aliveSpies,
+                    aliveNorm
+                }
+            })
+        } else {
+            this.setState({
+                result : {
+                    aliveSpies,
+                    aliveNorm
+                }
+            })
+        }
+
+        this.dismissModal();
+    }
+
     /************************************************************
      *                        Render
      ************************************************************/
@@ -277,7 +336,7 @@ class WhoIsSpy extends Component {
         return (
             <View style={styles.container}>
                 <Header title={
-                    JSON.stringify(this.state.players)
+                    JSON.stringify(this.state.result)
                 } />
 
                 <Core children={this._renderCore()} />                                    
