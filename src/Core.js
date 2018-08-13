@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { RoundSettings, CategoryTiles, PlayerTiles } from "./Widgets";
 
 const Core = ({
+    style,
     setGlobalState,
     globalState,
 }) => {
@@ -29,30 +30,22 @@ const Core = ({
         const body = widgets[core];
 
         if (typeof body === 'undefined') {
-            return <Text style={{fontSize: 24}}>
-                Plz provide a valid state for "core": 
-                enum({`${JSON.stringify(Object.keys(widgets))}`})
-            </Text>
+            return (
+                <Text style={{fontSize: 24}}>
+                    Plz provide a valid state for "core": 
+                    enum({`${JSON.stringify(Object.keys(widgets))}`})
+                </Text>
+            )
         }
 
         return body;
     }
 
     return (
-        <View style={styles.container}>
+        <View style={style}>
             {_renderBody()}
         </View>
     )
 };
-
-const styles = StyleSheet.create({
-    container: {
-        borderWidth: 1,
-        borderColor: "yellow",
-        backgroundColor: "lightyellow",
-        flex: 4.8,
-        width: "100%",
-    },
-})
 
 export default Core;

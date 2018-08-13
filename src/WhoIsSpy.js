@@ -63,16 +63,19 @@ class WhoIsSpy extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Header title={
-                    JSON.stringify(this.state.result)
-                } />
+                <Header 
+                    style={styles.headerContainer}
+                    title={JSON.stringify(this.state.result)} 
+                />
 
                 <Core
+                    style={styles.coreContainer}
                     setGlobalState={(obj, cb) => this.setStateByChild(obj, cb)}
                     globalState={this.state}
                 />                                    
 
                 <Footer
+                    style={styles.footerContainer}
                     setGlobalState={(obj, cb) => this.setStateByChild(obj, cb)}
                     globalState={this.state}
                 />
@@ -94,7 +97,27 @@ const styles = StyleSheet.create({
         padding: 20,
         justifyContent: "space-evenly",
         alignItems: "center",
-    }
+    },
+    headerContainer: {
+        borderWidth: 1,
+        borderColor: "steelblue",
+        backgroundColor: "lightblue",
+        flex: 0.9,
+        width: "100%",
+    },
+    coreContainer: {
+        borderWidth: 1,
+        borderColor: "yellow",
+        backgroundColor: "lightyellow",
+        flex: 4.8,
+        width: "100%",
+    },
+    footerContainer: {
+        borderWidth: 1,
+        backgroundColor: "palevioletred",
+        flex: 1,
+        width: "100%",
+    },
 })
 
 export default WhoIsSpy;

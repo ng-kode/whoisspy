@@ -61,16 +61,16 @@ const Modal = ({
 
         const body = widgets[modalContent];
 
-        // Error handling
         if (typeof body === 'undefined') {
-            return <Text style={{fontSize: 24}}>
-                Plz provide a valid state for "modalContent": 
-                enum({`${JSON.stringify(Object.keys(widgets))}`})
-                for modalPlayerId is {modalPlayerId !== null && "not"} null
-            </Text>
+            return (
+                <Text style={{fontSize: 24}}>
+                    Plz provide a valid state for "modalContent": 
+                    enum({`${JSON.stringify(Object.keys(widgets))}`})
+                    for modalPlayerId is {modalPlayerId !== null && "not"} null
+                </Text>
+            )
         }
 
-        // return widget by state
         return body
     }
     
