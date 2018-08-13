@@ -40,6 +40,8 @@ class WhoIsSpy extends Component {
             result: {},
             showPenalty: false,
         }
+
+        this.wordArr = [];
     }
 
     /************************************************************

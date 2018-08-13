@@ -1,0 +1,691 @@
+[{
+    "groupid": 400001,
+    "keywords": [{
+        "word": "689",
+        "description": ""
+    }, {
+        "word": "777",
+        "description": ""
+    }]
+}, {
+    "groupid": 100001,
+    "keywords": [{
+        "word": "煎蛋",
+        "description": ""
+    }, {
+        "word": "炒蛋",
+        "description": ""
+    }, {
+        "word": "太陽蛋",
+        "description": ""
+    }]
+}, {
+    "groupid": 100003,
+    "keywords": [{
+        "word": "蘋果",
+        "description": "蘋果（學名：Malus pumila）是薔薇科蘋果亞科蘋果屬植物，其樹為落葉喬木。蘋果的果實富含礦物質和維生素，是人們最常食用的水果之一。"
+    }, {
+        "word": "橙",
+        "description": "橙（学名：Citrus sinensis）是芸香科柑橘屬植物橙树的果实，亦稱為柳橙（柳丁）、甜橙、黄果、金环。橙是柑果，也是人類種植了很久的混合品種──本來是柚子（Citrus maxima）與橘子（Citrus reticulata）的雜交品種，起源於東南亞；在生物學的角度，人们日常所吃的甜橙其實亦是變種──原來的品種應該是酸橙，甜橙是酸橙在華南的變種。"
+    }]
+}, {
+    "groupid": 100002,
+    "keywords": [{
+        "word": "瑞士糖",
+        "description": ""
+    }, {
+        "word": "橡皮糖",
+        "description": ""
+    }, {
+        "word": "彩虹糖",
+        "description": ""
+    }]
+}, {
+    "groupid": 100005,
+    "keywords": [{
+        "word": "星洲炒米",
+        "description": ""
+    }, {
+        "word": "揚州炒飯",
+        "description": ""
+    }, {
+        "word": "福建炒飯",
+        "description": ""
+    }]
+}, {
+    "groupid": 100004,
+    "keywords": [{
+        "word": "炒麵",
+        "description": ""
+    }, {
+        "word": "炒米",
+        "description": ""
+    }]
+}, {
+    "groupid": 100007,
+    "keywords": [{
+        "word": "白切雞",
+        "description": ""
+    }, {
+        "word": "海南雞",
+        "description": ""
+    }, {
+        "word": "豉油雞",
+        "description": ""
+    }, {
+        "word": "麻油雞",
+        "description": ""
+    }, {
+        "word": "貴妃雞",
+        "description": ""
+    }, {
+        "word": "乞兒雞",
+        "description": ""
+    }, {
+        "word": "口水雞",
+        "description": ""
+    }]
+}, {
+    "groupid": 100006,
+    "keywords": [{
+        "word": "麵包",
+        "description": ""
+    }, {
+        "word": "蛋糕",
+        "description": ""
+    }]
+}, {
+    "groupid": 100009,
+    "keywords": [{
+        "word": "蔥油餅",
+        "description": ""
+    }, {
+        "word": "薄撐",
+        "description": ""
+    }]
+}, {
+    "groupid": 900005,
+    "keywords": [{
+        "word": "東京",
+        "description": ""
+    }, {
+        "word": "大阪",
+        "description": ""
+    }]
+}, {
+    "groupid": 100008,
+    "keywords": [{
+        "word": "水煮魚",
+        "description": ""
+    }, {
+        "word": "水煮牛",
+        "description": ""
+    }]
+}, {
+    "groupid": 900004,
+    "keywords": [{
+        "word": "巴黎",
+        "description": ""
+    }, {
+        "word": "米蘭",
+        "description": ""
+    }]
+}, {
+    "groupid": 100011,
+    "keywords": [{
+        "word": "冰皮月餅",
+        "description": ""
+    }, {
+        "word": "糯米糍",
+        "description": ""
+    }, {
+        "word": "雪米糍",
+        "description": ""
+    }]
+}, {
+    "groupid": 900007,
+    "keywords": [{
+        "word": "維也納",
+        "description": ""
+    }, {
+        "word": "布達佩斯",
+        "description": ""
+    }]
+}, {
+    "groupid": 100010,
+    "keywords": [{
+        "word": "酸辣湯",
+        "description": ""
+    }, {
+        "word": "冬蔭功",
+        "description": ""
+    }]
+}, {
+    "groupid": 900006,
+    "keywords": [{
+        "word": "台北",
+        "description": ""
+    }, {
+        "word": "台中",
+        "description": ""
+    }]
+}, {
+    "groupid": 100013,
+    "keywords": [{
+        "word": "皮蛋瘦肉粥",
+        "description": ""
+    }, {
+        "word": "柴魚花生粥",
+        "description": ""
+    }, {
+        "word": "及第粥",
+        "description": ""
+    }, {
+        "word": "艇仔粥",
+        "description": ""
+    }]
+}, {
+    "groupid": 900001,
+    "keywords": [{
+        "word": "科學館",
+        "description": ""
+    }, {
+        "word": "太空館",
+        "description": ""
+    }, {
+        "word": "博物館",
+        "description": ""
+    }]
+}, {
+    "groupid": 100012,
+    "keywords": [{
+        "word": "芝麻糊",
+        "description": ""
+    }, {
+        "word": "杏仁糊",
+        "description": ""
+    }, {
+        "word": "花生糊",
+        "description": ""
+    }]
+}, {
+    "groupid": 100015,
+    "keywords": [{
+        "word": "紅豆沙",
+        "description": ""
+    }, {
+        "word": "綠豆沙",
+        "description": ""
+    }]
+}, {
+    "groupid": 900003,
+    "keywords": [{
+        "word": "大學",
+        "description": ""
+    }, {
+        "word": "中學",
+        "description": ""
+    }, {
+        "word": "小學",
+        "description": ""
+    }]
+}, {
+    "groupid": 100014,
+    "keywords": [{
+        "word": "芋頭糕",
+        "description": ""
+    }, {
+        "word": "蘿蔔糕",
+        "description": ""
+    }, {
+        "word": "年糕",
+        "description": ""
+    }]
+}, {
+    "groupid": 900002,
+    "keywords": [{
+        "word": "學校",
+        "description": ""
+    }, {
+        "word": "補習社",
+        "description": ""
+    }]
+}, {
+    "groupid": 100017,
+    "keywords": [{
+        "word": "巨無霸",
+        "description": ""
+    }, {
+        "word": "足三兩",
+        "description": ""
+    }]
+}, {
+    "groupid": 100016,
+    "keywords": [{
+        "word": "叉燒包",
+        "description": ""
+    }, {
+        "word": "奶皇包",
+        "description": ""
+    }, {
+        "word": "菜肉包",
+        "description": ""
+    }]
+}, {
+    "groupid": 100019,
+    "keywords": [{
+        "word": "菜心",
+        "description": ""
+    }, {
+        "word": "芥蘭",
+        "description": ""
+    }]
+}, {
+    "groupid": 100018,
+    "keywords": [{
+        "word": "燒腩仔",
+        "description": ""
+    }, {
+        "word": "燒肉",
+        "description": ""
+    }, {
+        "word": "燒排骨",
+        "description": ""
+    }]
+}, {
+    "groupid": 100021,
+    "keywords": [{
+        "word": "西蘭花",
+        "description": ""
+    }, {
+        "word": "椰菜花",
+        "description": ""
+    }]
+}, {
+    "groupid": 100020,
+    "keywords": [{
+        "word": "魚蛋",
+        "description": ""
+    }, {
+        "word": "燒賣",
+        "description": ""
+    }]
+}, {
+    "groupid": 100023,
+    "keywords": [{
+        "word": "蜜瓜",
+        "description": ""
+    }, {
+        "word": "哈蜜瓜",
+        "description": ""
+    }]
+}, {
+    "groupid": 100022,
+    "keywords": [{
+        "word": "大樹菠蘿",
+        "description": ""
+    }, {
+        "word": "菠蘿",
+        "description": ""
+    }, {
+        "word": "榴槤",
+        "description": ""
+    }]
+}, {
+    "groupid": 100024,
+    "keywords": [{
+        "word": "蛋撻",
+        "description": ""
+    }, {
+        "word": "葡撻",
+        "description": ""
+    }, {
+        "word": "椰撻",
+        "description": ""
+    }]
+}, {
+    "groupid": 200003,
+    "keywords": [{
+        "word": "魔戒",
+        "description": ""
+    }, {
+        "word": "哈利波特",
+        "description": ""
+    }]
+}, {
+    "groupid": 200002,
+    "keywords": [{
+        "word": "那些年，我們一起追的女孩",
+        "description": ""
+    }, {
+        "word": "我的少女時代",
+        "description": ""
+    }, {
+        "word": "等一個人咖啡",
+        "description": ""
+    }]
+}, {
+    "groupid": 200001,
+    "keywords": [{
+        "word": "少林足球",
+        "description": ""
+    }, {
+        "word": "功夫",
+        "description": ""
+    }]
+}, {
+    "groupid": 200007,
+    "keywords": [{
+        "word": "七宗罪",
+        "description": ""
+    }, {
+        "word": "搏擊會",
+        "description": ""
+    }]
+}, {
+    "groupid": 200006,
+    "keywords": [{
+        "word": "月黑高飛",
+        "description": ""
+    }, {
+        "word": "飛越瘋人院",
+        "description": ""
+    }]
+}, {
+    "groupid": 200005,
+    "keywords": [{
+        "word": "蜘蛛俠",
+        "description": ""
+    }, {
+        "word": "死侍",
+        "description": ""
+    }]
+}, {
+    "groupid": 200004,
+    "keywords": [{
+        "word": "正義聯盟",
+        "description": ""
+    }, {
+        "word": "復仇者聯盟",
+        "description": ""
+    }]
+}, {
+    "groupid": 200011,
+    "keywords": [{
+        "word": "異形",
+        "description": ""
+    }, {
+        "word": "鐵血戰士",
+        "description": ""
+    }]
+}, {
+    "groupid": 200010,
+    "keywords": [{
+        "word": "帝國驕雄",
+        "description": ""
+    }, {
+        "word": "天國驕雄",
+        "description": ""
+    }]
+}, {
+    "groupid": 200009,
+    "keywords": [{
+        "word": "凶兆",
+        "description": ""
+    }, {
+        "word": "驅魔人",
+        "description": ""
+    }]
+}, {
+    "groupid": 200008,
+    "keywords": [{
+        "word": "千與千尋",
+        "description": ""
+    }, {
+        "word": "龍貓",
+        "description": ""
+    }]
+}, {
+    "groupid": 200015,
+    "keywords": [{
+        "word": "反斗奇兵",
+        "description": ""
+    }, {
+        "word": "怪獸公司",
+        "description": ""
+    }]
+}, {
+    "groupid": 200014,
+    "keywords": [{
+        "word": "黑社會",
+        "description": ""
+    }, {
+        "word": "江湖",
+        "description": ""
+    }]
+}, {
+    "groupid": 200013,
+    "keywords": [{
+        "word": "潛行兇間",
+        "description": ""
+    }, {
+        "word": "不赦島",
+        "description": ""
+    }]
+}, {
+    "groupid": 200012,
+    "keywords": [{
+        "word": "咒怨",
+        "description": ""
+    }, {
+        "word": "午夜凶鈴",
+        "description": ""
+    }]
+}, {
+    "groupid": 200019,
+    "keywords": [{
+        "word": "鐵甲奇俠",
+        "description": ""
+    }, {
+        "word": "蝙蝠俠",
+        "description": ""
+    }]
+}, {
+    "groupid": 200018,
+    "keywords": [{
+        "word": "舒特拉的名單",
+        "description": ""
+    }, {
+        "word": "一個快樂的傳說",
+        "description": ""
+    }]
+}, {
+    "groupid": 200017,
+    "keywords": [{
+        "word": "神奇四俠",
+        "description": ""
+    }, {
+        "word": "超人特工隊",
+        "description": ""
+    }]
+}, {
+    "groupid": 200016,
+    "keywords": [{
+        "word": "大犯罪家",
+        "description": ""
+    }, {
+        "word": "捉智雙雄",
+        "description": ""
+    }]
+}, {
+    "groupid": 200023,
+    "keywords": [{
+        "word": "飢餓遊戲",
+        "description": ""
+    }, {
+        "word": "分歧者",
+        "description": ""
+    }, {
+        "word": "移動迷宮",
+        "description": ""
+    }]
+}, {
+    "groupid": 200022,
+    "keywords": [{
+        "word": "星球大戰",
+        "description": ""
+    }, {
+        "word": "星空奇遇記",
+        "description": ""
+    }]
+}, {
+    "groupid": 200021,
+    "keywords": [{
+        "word": "星際啟示錄",
+        "description": ""
+    }, {
+        "word": "引力邊緣",
+        "description": ""
+    }]
+}, {
+    "groupid": 200020,
+    "keywords": [{
+        "word": "隔世救未來",
+        "description": ""
+    }, {
+        "word": "危機解密",
+        "description": ""
+    }]
+}, {
+    "groupid": 300004,
+    "keywords": [{
+        "word": "風帆",
+        "description": ""
+    }, {
+        "word": "滑浪風帆",
+        "description": ""
+    }]
+}, {
+    "groupid": 300005,
+    "keywords": [{
+        "word": "獨木舟",
+        "description": ""
+    }, {
+        "word": "划艇",
+        "description": ""
+    }]
+}, {
+    "groupid": 300006,
+    "keywords": [{
+        "word": "柔道",
+        "description": ""
+    }, {
+        "word": "空手道",
+        "description": ""
+    }, {
+        "word": "合氣道",
+        "description": ""
+    }, {
+        "word": "跆拳道",
+        "description": ""
+    }]
+}, {
+    "groupid": 300007,
+    "keywords": [{
+        "word": "三級跳",
+        "description": ""
+    }, {
+        "word": "跳遠",
+        "description": ""
+    }]
+}, {
+    "groupid": 300001,
+    "keywords": [{
+        "word": "排球",
+        "description": ""
+    }, {
+        "word": "足球",
+        "description": ""
+    }]
+}, {
+    "groupid": 300002,
+    "keywords": [{
+        "word": "藍球",
+        "description": ""
+    }, {
+        "word": "手球",
+        "description": ""
+    }]
+}, {
+    "groupid": 300003,
+    "keywords": [{
+        "word": "壁球",
+        "description": ""
+    }, {
+        "word": "網球",
+        "description": ""
+    }, {
+        "word": "羽毛球",
+        "description": ""
+    }]
+}, {
+    "groupid": 300012,
+    "keywords": [{
+        "word": "王者榮耀",
+        "description": ""
+    }, {
+        "word": "傳說對決",
+        "description": ""
+    }, {
+        "word": "英雄聯盟",
+        "description": ""
+    }]
+}, {
+    "groupid": 300013,
+    "keywords": [{
+        "word": "桌球",
+        "description": ""
+    }, {
+        "word": "康樂棋",
+        "description": ""
+    }]
+}, {
+    "groupid": 300008,
+    "keywords": [{
+        "word": "跳高",
+        "description": ""
+    }, {
+        "word": "撐竿跳高",
+        "description": ""
+    }]
+}, {
+    "groupid": 300009,
+    "keywords": [{
+        "word": "羅漢拳",
+        "description": ""
+    }, {
+        "word": "太極拳",
+        "description": ""
+    }]
+}, {
+    "groupid": 300010,
+    "keywords": [{
+        "word": "洞穴探險",
+        "description": ""
+    }, {
+        "word": "野外定向",
+        "description": ""
+    }]
+}, {
+    "groupid": 300011,
+    "keywords": [{
+        "word": "擲鐵餅",
+        "description": ""
+    }, {
+        "word": "擲鏈球",
+        "description": ""
+    }, {
+        "word": "擲標槍",
+        "description": ""
+    }]
+}]

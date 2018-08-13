@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import CATEGORY from "../data/CATEGORY.json";
 
 const cats = [
     {
@@ -24,15 +25,6 @@ const cats = [
     },
 ]
 
-const Tile = ({ name, isLastTile, onPress }) => (
-    <TouchableOpacity 
-        style={[styles.tileContainer, isLastTile && styles.lastTile]}
-        onPress={onPress}
-    >
-        <Text>{name}</Text>
-    </TouchableOpacity>
-)
-
 class CategoryTiles extends Component {
     state = {
         selectedIds: this.props.selectedCatIds
@@ -55,17 +47,23 @@ class CategoryTiles extends Component {
     render() {
         return (
             <View style={styles.tilesWrapper}>
-                {/* <Tile
-                    name={this.state.selectedIds}
-                /> */}
-                {cats.map((cat, i) => 
-                    <Tile 
-                        key={cat.name}
-                        name={cat.name} 
-                        isLastTile={i === cats.length - 1}
+                {CATEGORY.map((cat, i) => 
+                    <TouchableOpacity 
+                        key={cat.text}
+                        style={styles.tileContainer}
                         onPress={() => this.onCatTilePress(cat.id)}
-                    />
+                    >
+                        <Text>{cat.text}</Text>
+                    </TouchableOpacity>
                 )}
+
+                <TouchableOpacity 
+                    key="allthecat"
+                    style={[styles.tileContainer, styles.lastTile]}
+                    onPress={() => {}}
+                >
+                    <Text>✌️全部✌️</Text>
+                </TouchableOpacity>
             </View>
         );
     }
