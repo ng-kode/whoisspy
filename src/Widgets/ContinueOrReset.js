@@ -3,14 +3,17 @@ import { View, Text, StyleSheet } from 'react-native';
 import { DefaultButton } from "../CommonUI";
 import { getRandomInt } from '../WhoIsSpy';
 
-const ContinueOrReset = ({ 
+const ContinueOrReset = ({     
     setGlobalState,
-    players,
-    numSpies,
-    numPlayers,
-    roundNum,
+    globalState,
     dismissModal,
 }) => {
+    const {
+        players,
+        numSpies,
+        numPlayers,
+        roundNum,
+    } = globalState;
 
     const onContinuePress = () => {
         let newPlayers = players.map(p => {

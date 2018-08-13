@@ -3,12 +3,16 @@ import { View, Text, StyleSheet } from 'react-native';
 import { DefaultButton } from "../CommonUI";
 
 const NextRoundWord = ({
-    word,
     setGlobalState,
-    players,
-    modalPlayerId,
+    globalState,    
     dismissModal,
+    word,
 }) => {
+    const {
+        players,
+        modalPlayerId,
+    } = globalState;
+
     const onWordSeenPress = () => {
         players[modalPlayerId] = {
             ...players[modalPlayerId],

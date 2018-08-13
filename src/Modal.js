@@ -4,16 +4,17 @@ import { DefaultModal } from "./CommonUI";
 import { ContinueOrReset, WordThenPhoto, KeywordOrKill, NextRoundWord } from './Widgets';
 
 const Modal = ({
-    body,
     setGlobalState,
-    modalVisible,
+    globalState,
     dismissModal,
-    modalPlayerId,
-    players,
-    numSpies,
-    numPlayers,
-    roundNum,
 }) => {
+    const {
+        modalContent,
+        modalVisible,
+        modalPlayerId,
+        players,
+    } = globalState;
+
     const _renderModalContent = () => {
         if (!modalVisible) {
             return
@@ -28,10 +29,7 @@ const Modal = ({
                 ...widgets,
                 "continueOrReset": <ContinueOrReset
                     setGlobalState={setGlobalState}
-                    players={players}
-                    numSpies={numSpies}
-                    numPlayers={numPlayers}
-                    roundNum={roundNum}
+                    globalState={globalState}
                     dismissModal={dismissModal}
                 />        
             }
@@ -40,40 +38,31 @@ const Modal = ({
             widgets = {
                 ...widgets,
                 "wordThenPhoto": <WordThenPhoto
-                    player={player}
-                    players={players}
-                    modalPlayerId={modalPlayerId}
-                    dismissModal={dismissModal}
+                    globalState={globalState}
                     setGlobalState={setGlobalState}
+                    dismissModal={dismissModal}
+                    player={player}
                 />,
                 "keywordOrKill": <KeywordOrKill
-                    player={player}
-                    players={players}
-                    modalPlayerId={modalPlayerId}
-                    dismissModal={dismissModal}                    
+                    globalState={globalState}
                     setGlobalState={setGlobalState}
-                />,
-                "continueOrReset": <ContinueOrReset
-                    players={players}
-                    numSpies={numSpies}
-                    numPlayers={numPlayers}
-                    roundNum={roundNum}
                     dismissModal={dismissModal}
-                    setGlobalState={setGlobalState}
+                    player={player}
                 />,
                 "nextRoundWord": <NextRoundWord
-                    word={player.word}
+                    globalState={globalState}
                     setGlobalState={setGlobalState}
-                    players={players}
-                    modalPlayerId={modalPlayerId}
                     dismissModal={dismissModal}
+                    word={player.word}
                 />,
                 "nothing": <View/>
             }
         }
 
+        const body = widgets[modalContent];
+
         // Error handling
-        if (typeof widgets[body] === 'undefined') {
+        if (typeof body === 'undefined') {
             return <Text style={{fontSize: 24}}>
                 Plz provide a valid state for "modalContent": 
                 enum({`${JSON.stringify(Object.keys(widgets))}`})
@@ -82,7 +71,7 @@ const Modal = ({
         }
 
         // return widget by state
-        return widgets[body]
+        return body
     }
     
     return (

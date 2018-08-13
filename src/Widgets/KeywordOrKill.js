@@ -10,11 +10,15 @@ class KeywordOrKill extends Component {
 
     onKillPress = () => {
         const {
-            players,
-            modalPlayerId,
+            globalState,
             setGlobalState,
             dismissModal,
         } = this.props;
+
+        const {
+            players,
+            modalPlayerId,
+        } = globalState;
 
         players[modalPlayerId] = {
             ...players[modalPlayerId],

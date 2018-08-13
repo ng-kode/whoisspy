@@ -4,8 +4,12 @@ import CATEGORY from "../data/CATEGORY.json";
 
 const CategoryTiles = ({
     setGlobalState,
-    tmpCatIds,
+    globalState,
 }) => {
+    const {
+        tmpCatIds,
+    } = globalState;
+
     const onCatTilePress = id => {
         setGlobalState({
             "tmpCatIds": tmpCatIds.includes(id)

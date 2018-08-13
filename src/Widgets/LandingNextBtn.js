@@ -4,9 +4,13 @@ import { DEFAULT_AVATAR, getRandomInt } from '../WhoIsSpy';
 
 const LandingNextBtn = ({
     setGlobalState,
-    numPlayers, 
-    numSpies
+    globalState,
 }) => {
+    const {
+        numPlayers, 
+        numSpies
+    } = globalState;
+
     const onPress = () => {
         let players = Array(numPlayers).fill().map((_, i) => {
             return {

@@ -10,54 +10,50 @@ import {
     ContinueControls
 } from "./Widgets";
 
-const Footer = ({ 
-    body,
+const Footer = ({
     setGlobalState,
-    showGuess,
-    tmpCatIds,
-    selectedCatIds,
-    numPlayers,
-    numSpies,
+    globalState,
  }) => {
-
+    const {
+        footer,
+    } = globalState;
 
     const _renderFooter = () => {
-        // available widgets
         const widgets = {
             "landingNextBtn": <LandingNextBtn
                 setGlobalState={setGlobalState}
-                numPlayers={numPlayers}
-                numSpies={numSpies}
+                globalState={globalState}
             />,
             "categoryControls": <CategoryControls
                 setGlobalState={setGlobalState}
-                tmpCatIds={tmpCatIds}
-                selectedCatIds={selectedCatIds}
+                globalState={globalState}
             />,
             "playerTilesControls": <PlayerTilesControls
-                showGuess={showGuess}
+                globalState={globalState}
                 setGlobalState={setGlobalState}
             />,
             "guessControls": <GuessControls/>,
             "sharePenaltyControls": <SharePenaltyControls
                 setGlobalState={setGlobalState}
+                globalState={globalState}
             />,
             "continueControls": <ContinueControls
                 setGlobalState={setGlobalState}
+                globalState={globalState}
             />,
             "nothing": <View/>
         }
 
-        // Error handling
-        if (typeof widgets[body] === 'undefined') {
+        const body = widgets[footer];
+        
+        if (typeof body === 'undefined') {
             return <Text style={{fontSize: 24}}>
                 Plz provide a valid state for "footer": 
                 enum({`${JSON.stringify(Object.keys(widgets))}`})
             </Text>
         }
 
-        // return widget by state
-        return widgets[body]
+        return body;
     }
 
     return (

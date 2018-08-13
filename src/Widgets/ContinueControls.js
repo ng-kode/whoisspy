@@ -2,7 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { DefaultButton } from "../CommonUI";
 
-const ContinueControls = ({ 
+const ContinueControls = ({
+    globalState,
     setGlobalState
 }) => {
     const onContinuePress = () => {

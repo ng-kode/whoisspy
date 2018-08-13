@@ -3,17 +3,28 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { DEFAULT_AVATAR } from '../WhoIsSpy';
 
 const PlayerTiles = ({ 
-    players, 
-    onTilePress, 
-    showPenalty, 
-    result 
+    globalState,
+    setGlobalState,
 }) => {
-    onPress = (id, alive) => {
+    const {
+        players,
+        showPenalty, 
+        result,
+    } = globalState;
+
+    const onPress = (id, alive) => {
         if (!alive) {
             return;
         }
 
-        return onTilePress(id);
+        if (result.winner) {
+            return;
+        }
+
+        setGlobalState({ 
+            modalVisible: true,
+            modalPlayerId: id,
+        });
     }
 
     return (
@@ -26,7 +37,7 @@ const PlayerTiles = ({
                     !player.alive && { backgroundColor: "grey" },
                     (showPenalty && player.role !== result.winner) && { backgroundColor: "red" }
                 ]}
-                onPress={() => this.onPress(player.id, player.alive)}
+                onPress={() => onPress(player.id, player.alive)}
             >
                 <Text>{player.name}</Text>
                 {player.photoPath !== DEFAULT_AVATAR && <Image

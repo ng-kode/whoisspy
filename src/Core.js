@@ -2,59 +2,40 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { RoundSettings, CategoryTiles, PlayerTiles } from "./Widgets";
 
-const Core = ({ 
-    body,
+const Core = ({
     setGlobalState,
-    numSpies,
-    numPlayers,
-    selectedCatIds,
-    tmpCatIds,
-    players,
-    showPenalty,
-    result,
+    globalState,
 }) => {
-    const onTilePress = id => {
-        if (result.winner) {
-            return;
-        }
-
-        setGlobalState({ 
-            modalVisible: true,
-            modalPlayerId: id,
-        });
-    }
+    const {
+        core,
+    } = globalState;
 
     const _renderBody = () => {
-        // available widgets
         const widgets = {
             "rs": <RoundSettings
                 setGlobalState={setGlobalState}
-                numSpies={numSpies}
-                numPlayers={numPlayers}
-                selectedCatIds={selectedCatIds}                
+                globalState={globalState}
             />,
             "cat": <CategoryTiles
                 setGlobalState={setGlobalState}
-                tmpCatIds={tmpCatIds}
+                globalState={globalState}
             />,
             "playerTiles": <PlayerTiles
-                players={players}
-                onTilePress={onTilePress}
-                showPenalty={showPenalty}
-                result={result}
+                setGlobalState={setGlobalState}
+                globalState={globalState}
             />
         }
 
-        // Error handling
-        if (typeof widgets[body] === 'undefined') {
+        const body = widgets[core];
+
+        if (typeof body === 'undefined') {
             return <Text style={{fontSize: 24}}>
                 Plz provide a valid state for "core": 
                 enum({`${JSON.stringify(Object.keys(widgets))}`})
             </Text>
         }
 
-        // return widget by state
-        return widgets[body]
+        return body;
     }
 
     return (

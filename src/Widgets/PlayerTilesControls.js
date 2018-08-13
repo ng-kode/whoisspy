@@ -3,9 +3,13 @@ import { View, Text } from 'react-native';
 import { DefaultButton } from "../CommonUI";
 
 const PlayerTilesControls = ({ 
-    showGuess, 
+    globalState,
     setGlobalState 
 }) => {
+    const {
+        showGuess, 
+    } = globalState;
+
     const onGuessPress = () => {
         setGlobalState({
             footer: "guessControls",

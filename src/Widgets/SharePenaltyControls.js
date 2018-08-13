@@ -3,7 +3,8 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 import { DefaultButton } from "../CommonUI";
 
 const SharePenaltyControls = ({ 
-    setGlobalState
+    setGlobalState,
+    globalState,
 }) => {
     const onPenaltyPress = () => {
         setGlobalState({

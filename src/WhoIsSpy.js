@@ -61,23 +61,6 @@ class WhoIsSpy extends Component {
     }
 
     render() {
-        const {
-            core,
-            numSpies,
-            numPlayers,
-            selectedCatIds,
-            tmpCatIds,
-            players,
-            showPenalty,
-            result,
-            footer,
-            showGuess,
-            modalContent,
-            modalVisible,
-            modalPlayerId,
-            roundNum
-        } = this.state
-
         return (
             <View style={styles.container}>
                 <Header title={
@@ -85,37 +68,19 @@ class WhoIsSpy extends Component {
                 } />
 
                 <Core
-                    body={core}
                     setGlobalState={(obj, cb) => this.setStateByChild(obj, cb)}
-                    numSpies={numSpies}
-                    numPlayers={numPlayers}
-                    selectedCatIds={selectedCatIds}
-                    tmpCatIds={tmpCatIds}
-                    players={players}
-                    showPenalty={showPenalty}
-                    result={result}
+                    globalState={this.state}
                 />                                    
 
                 <Footer
-                    body={footer}
                     setGlobalState={(obj, cb) => this.setStateByChild(obj, cb)}
-                    showGuess={showGuess}
-                    tmpCatIds={tmpCatIds}
-                    selectedCatIds={selectedCatIds}
-                    numPlayers={numPlayers}
-                    numSpies={numSpies}
+                    globalState={this.state}
                 />
 
                 <Modal
-                    body={modalContent}
                     setGlobalState={(obj, cb) => this.setStateByChild(obj, cb)}
-                    modalVisible={modalVisible}
-                    dismissModal={this.dismissModal}
-                    modalPlayerId={modalPlayerId}
-                    players={players}
-                    numSpies={numSpies}
-                    numPlayers={numPlayers}
-                    roundNum={roundNum}
+                    globalState={this.state}
+                    dismissModal={this.dismissModal}                    
                 />
             </View>
         )

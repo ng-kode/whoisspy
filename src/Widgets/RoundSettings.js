@@ -3,11 +3,15 @@ import { View, Text, Slider, StyleSheet } from 'react-native';
 import { DefaultButton, FloatingButton } from '../CommonUI';
 
 const RoundSettings = ({
-    numSpies,
-    numPlayers, 
-    selectedCatIds,
+    globalState,
     setGlobalState,
 }) => {
+
+    const {
+        numSpies,
+        numPlayers, 
+        selectedCatIds,
+    } = globalState;
 
     const setNumSpies = sign => {
         setGlobalState({

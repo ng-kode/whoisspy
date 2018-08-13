@@ -4,9 +4,12 @@ import { DefaultButton } from "../CommonUI";
 
 const CategoryControls = ({ 
     setGlobalState,
-    tmpCatIds,
-    selectedCatIds,
+    globalState,
 }) => {
+    const {
+        tmpCatIds,
+    } = globalState;
+
     onOkayPress = () => {
         setGlobalState({
             core: "rs",            
