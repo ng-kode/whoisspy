@@ -4,11 +4,32 @@ import { DefaultButton, FloatingButton } from '../CommonUI';
 
 const RoundSettings = ({
     numSpies,
-    numPlayers,
-    setNumSpies, 
-    setNumPlayers, 
-    onSelectCatClick 
-}) => (
+    numPlayers, 
+    selectedCatIds,
+    setGlobalState,
+}) => {
+
+    const setNumSpies = sign => {
+        setGlobalState({
+            numSpies: numSpies + parseInt(sign + 1)
+        })
+    }
+
+    const setNumPlayers = val => {
+        setGlobalState({
+            numPlayers: val
+        })
+    }
+
+    const onSelectCatClick = () => {
+        setGlobalState({
+            core: "cat",
+            tmpCatIds: selectedCatIds,
+            footer: "categoryControls",
+        })
+    }
+    
+    return (
     <View>
         <DefaultButton
             title="選擇種類"
@@ -36,7 +57,7 @@ const RoundSettings = ({
             />
         </View>
     </View>
-);
+)};
 
 const styles = StyleSheet.create({
     numSpyContainer: {

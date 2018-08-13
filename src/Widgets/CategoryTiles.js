@@ -2,71 +2,40 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import CATEGORY from "../data/CATEGORY.json";
 
-const cats = [
-    {
-        id: 1000,
-        name: 'cat 0'
-    },
-    {
-        id: 2000,
-        name: 'cat 1'
-    },
-    {
-        id: 3000,
-        name: 'cat 2'
-    },
-    {
-        id: 4000,
-        name: 'cat 3'
-    },
-    {
-        id: 5000,
-        name: 'cat 4'
-    },
-]
-
-class CategoryTiles extends Component {
-    state = {
-        selectedIds: this.props.selectedCatIds
-    }
-
-    getSelectedIds = () => this.state.selectedIds;
-
-    onCatTilePress = id => {
-        const {
-            selectedIds
-        } = this.state;
-
-        this.setState({
-            selectedIds: selectedIds.includes(id)
-                ? selectedIds.filter(catid => catid !== id)
-                : selectedIds.concat(id)
+const CategoryTiles = ({
+    setGlobalState,
+    tmpCatIds,
+}) => {
+    const onCatTilePress = id => {
+        setGlobalState({
+            "tmpCatIds": tmpCatIds.includes(id)
+                ? tmpCatIds.filter(catid => catid !== id)
+                : tmpCatIds.concat(id)
         });
     }    
-
-    render() {
-        return (
-            <View style={styles.tilesWrapper}>
-                {CATEGORY.map((cat, i) => 
-                    <TouchableOpacity 
-                        key={cat.text}
-                        style={styles.tileContainer}
-                        onPress={() => this.onCatTilePress(cat.id)}
-                    >
-                        <Text>{cat.text}</Text>
-                    </TouchableOpacity>
-                )}
-
+    
+    return (
+        <View style={styles.tilesWrapper}>
+            {CATEGORY.map((cat, i) => 
                 <TouchableOpacity 
-                    key="allthecat"
-                    style={[styles.tileContainer, styles.lastTile]}
-                    onPress={() => {}}
+                    key={cat.text}
+                    style={styles.tileContainer}
+                    onPress={() => onCatTilePress(cat.id)}
                 >
-                    <Text>✌️全部✌️</Text>
+                    <Text>{cat.text}</Text>
                 </TouchableOpacity>
-            </View>
-        );
-    }
+            )}
+
+            <TouchableOpacity 
+                key="allthecat"
+                style={[styles.tileContainer, styles.lastTile]}
+                onPress={() => {}}
+            >
+                <Text>✌️全部✌️ {JSON.stringify(tmpCatIds)}</Text>
+            </TouchableOpacity>
+        </View>
+    );
+    
 } 
 
 const styles = StyleSheet.create({

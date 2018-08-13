@@ -6,15 +6,37 @@ import { DEFAULT_AVATAR } from '../WhoIsSpy';
 class WordThenPhoto extends Component {
     state = {
         showCamera: false,
-        isRetake: this.props.photoPath !== DEFAULT_AVATAR,
+        isRetake: this.props.player.photoPath !== DEFAULT_AVATAR,
     }
 
     onBtnPress = async () => {
         if (this.state.showCamera) {
             const options = { quality: 0.5, base64: true };
             const data = await this.camera.takePictureAsync(options);
-            console.log(data.uri);
-            this.props.onPhotoPathRetrieved(data.uri);
+            const uri = data.uri;
+            console.log(uri);
+            
+            const {
+                players,
+                modalPlayerId,
+                setGlobalState,
+                dismissModal
+            } = this.props;
+
+            players[modalPlayerId] = {
+                ...players[modalPlayerId],
+                photoPath: { uri },
+                wordSeen: true,            
+            }
+
+            const showGuess = players.every(p => p.wordSeen && p.photoPath !== DEFAULT_AVATAR);
+
+            setGlobalState({
+                players,
+                showGuess,
+            }, (newState) => {
+                dismissModal();
+            })
         } else {
             this.setState({ showCamera: true })
         }
@@ -22,10 +44,14 @@ class WordThenPhoto extends Component {
 
     render() {
         const {
-            word,
-            photoPath,
+            player,
             dismissModal,
         } = this.props;
+
+        const {
+            word,
+            photoPath,
+        } = player;
 
         const {
             showCamera,

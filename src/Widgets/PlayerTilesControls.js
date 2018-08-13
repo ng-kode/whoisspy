@@ -2,17 +2,28 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { DefaultButton } from "../CommonUI";
 
-const PlayerTilesControls = ({ onResetPress, showGuess, onGuessPress }) => (
+const PlayerTilesControls = ({ 
+    showGuess, 
+    setGlobalState 
+}) => {
+    const onGuessPress = () => {
+        setGlobalState({
+            footer: "guessControls",
+            modalContent: "keywordOrKill"
+        });
+    }
+
+    return (
     <View>
         <DefaultButton
             title="RESET"
-            onPress={onResetPress}
+            onPress={() => {}}
         />
         {showGuess && <DefaultButton
             title="GUESS!"
             onPress={onGuessPress}
         />}
     </View>
-);
+)};
 
 export default PlayerTilesControls;

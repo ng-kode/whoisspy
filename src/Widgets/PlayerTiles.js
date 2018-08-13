@@ -2,7 +2,12 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { DEFAULT_AVATAR } from '../WhoIsSpy';
 
-const PlayerTiles = ({ players, onTilePress, showPenalty, result }) => {
+const PlayerTiles = ({ 
+    players, 
+    onTilePress, 
+    showPenalty, 
+    result 
+}) => {
     onPress = (id, alive) => {
         if (!alive) {
             return;

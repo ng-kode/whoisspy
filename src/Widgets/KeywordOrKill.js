@@ -8,13 +8,67 @@ class KeywordOrKill extends Component {
         showKillConfirm: false,
     }
 
+    onKillPress = () => {
+        const {
+            players,
+            modalPlayerId,
+            setGlobalState,
+            dismissModal,
+        } = this.props;
+
+        players[modalPlayerId] = {
+            ...players[modalPlayerId],
+            alive: false,            
+        }
+
+        const aliveSpies = players.filter(p => p.role === 's' && p.alive).length;
+        const aliveNorm = players.filter(p => p.role === 'c' && p.alive).length;
+        console.log("aliveSpies", aliveSpies);
+        console.log("aliveNorm", aliveNorm);
+        
+        const spyWin = aliveSpies === aliveNorm;
+        const normWin = aliveSpies === 0;
+
+        if (spyWin) {
+            setGlobalState({
+                result : {
+                    winner: 's',
+                    aliveSpies,
+                    aliveNorm
+                },
+                footer: "sharePenaltyControls",
+            })
+        } else if (normWin) {
+            setGlobalState({
+                result : {
+                    winner: 'c',
+                    aliveSpies,
+                    aliveNorm
+                },
+                footer: "sharePenaltyControls",
+            })
+        } else {
+            setGlobalState({
+                result : {
+                    aliveSpies,
+                    aliveNorm
+                }
+            })
+        }
+
+        dismissModal();
+    }
+
     render() {
         const {
             dismissModal,
-            word,
-            onKillPress,
-            photoPath,
+            player,
         } = this.props;
+
+        const {
+            word,
+            photoPath,
+        } = player;
 
         const {
             showWord,
@@ -56,7 +110,7 @@ class KeywordOrKill extends Component {
                         />
                         <Button
                             title="OK"
-                            onPress={onKillPress}
+                            onPress={this.onKillPress}
                         />
                         <Button
                             title="CANCEL"
