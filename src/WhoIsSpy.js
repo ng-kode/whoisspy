@@ -165,7 +165,10 @@ class WhoIsSpy extends Component {
                     onResetPress={() => {}}
                     onContinuePress={this.toNextRound}
                 />,
-                "nextRoundWord": <NextRoundWord/>,
+                "nextRoundWord": <NextRoundWord
+                    word={player.word}
+                    onWordSeenPress={this.onNextRoundWordSeenPress}
+                />,
                 "nothing": <View/>
             }
         }
@@ -406,6 +409,27 @@ class WhoIsSpy extends Component {
         })
     }
 
+    onNextRoundWordSeenPress = () => {
+        const {
+            players,
+            modalPlayerId
+        } = this.state;
+
+        players[modalPlayerId] = {
+            ...players[modalPlayerId],
+            wordSeen: true,
+        }
+
+        const showGuess = players.every(p => p.wordSeen);
+
+        this.setState({
+            players,
+            showGuess,
+        }, () => {
+            this.dismissModal();
+        })
+    }
+
     /************************************************************
      *                        Render
      ************************************************************/
@@ -443,7 +467,7 @@ const styles = StyleSheet.create({
 export default WhoIsSpy;
 
 function getRandomInt(max) {
-return Math.floor(Math.random() * Math.floor(max));
+    return Math.floor(Math.random() * Math.floor(max));
 }
 
 // https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
