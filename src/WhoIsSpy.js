@@ -247,10 +247,14 @@ class WhoIsSpy extends Component {
     }
 
     onTilePress = id => {
+        if (this.state.result.winner) {
+            return;
+        }
+
         this.setState({ 
             modalVisible: true,
             modalPlayerId: id,
-        })
+        });
     }
 
     onPhotoTaken = uri => {
@@ -295,8 +299,8 @@ class WhoIsSpy extends Component {
 
         const aliveSpies = players.filter(p => p.role === 's' && p.alive).length;
         const aliveNorm = players.filter(p => p.role === 'c' && p.alive).length;
-        console.log(aliveSpies);
-        console.log(aliveNorm);
+        console.log("aliveSpies", aliveSpies);
+        console.log("aliveNorm", aliveNorm);
         
         const spyWin = aliveSpies === aliveNorm;
         const normWin = aliveSpies === 0;

@@ -2,13 +2,22 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { DEFAULT_AVATAR } from '../WhoIsSpy';
 
-const PlayerTiles = ({ players, onTilePress }) => (
+const PlayerTiles = ({ players, onTilePress }) => {
+    onPress = (id, alive) => {
+        if (!alive) {
+            return;
+        }
+
+        return onTilePress(id);
+    }
+
+    return (
     <View style={styles.tilesWrapper}>
         {players.map(player =>
             <TouchableOpacity
                 key={JSON.stringify(player)}
-                style={styles.tileContainer}
-                onPress={() => onTilePress(player.id)}
+                style={[styles.tileContainer, !player.alive && { backgroundColor: "grey" }]}
+                onPress={() => this.onPress(player.id, player.alive)}
             >
                 <Text>{player.name}</Text>
                 {player.photoPath !== DEFAULT_AVATAR && <Image
@@ -18,7 +27,7 @@ const PlayerTiles = ({ players, onTilePress }) => (
             </TouchableOpacity>
         )}
     </View>
-);
+)};
 
 const styles = StyleSheet.create({
     tilesWrapper: {
