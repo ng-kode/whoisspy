@@ -13,6 +13,7 @@ const ContinueOrReset = ({
         numSpies,
         numPlayers,
         roundNum,
+        wordArr
     } = globalState;
 
     const onContinuePress = () => {
@@ -22,13 +23,14 @@ const ContinueOrReset = ({
                 role: 'c',
                 wordSeen: false,
                 alive: true,
-                word: `字字字Round${roundNum + 1}`
+                word: wordArr[roundNum + 1]['c']
             }
         });
 
         while (newPlayers.filter(p => p.role === 's').length !== numSpies) {
             const spyIdx = getRandomInt(numPlayers);
             newPlayers[spyIdx].role = 's';
+            newPlayers[spyIdx].word = wordArr[roundNum + 1]['s'];
         };
 
         setGlobalState({

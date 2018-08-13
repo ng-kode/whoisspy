@@ -40,9 +40,8 @@ class WhoIsSpy extends Component {
             roundNum: 0,
             result: {},
             showPenalty: false,
+            wordArr: [],
         }
-
-        this.wordArr = [];
     }
     
     dismissModal = () => {
