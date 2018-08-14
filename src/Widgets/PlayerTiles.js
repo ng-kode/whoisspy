@@ -10,6 +10,7 @@ const PlayerTiles = ({
         players,
         showPenalty, 
         result,
+        onPlayerTilePress,
     } = globalState;
 
     const onPress = (id, alive) => {
@@ -24,6 +25,7 @@ const PlayerTiles = ({
         setGlobalState({ 
             modalVisible: true,
             modalPlayerId: id,
+            modalContent: onPlayerTilePress,
         });
     }
 

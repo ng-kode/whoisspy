@@ -11,6 +11,7 @@ import ShareControls from "./ShareControls";
 import RoundCompleteControls from "./RoundCompleteControls";
 import ContinueOrReset from "./ContinueOrReset";
 import NextRoundWord from "./NextRoundWord";
+import ConfirmReset from "./ConfirmReset";
 
 export {
     RoundSettings,
@@ -26,4 +27,5 @@ export {
     RoundCompleteControls,
     ContinueOrReset,
     NextRoundWord,
+    ConfirmReset,
 }

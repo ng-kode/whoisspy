@@ -12,6 +12,7 @@ export const INITIAL_STATE = {
     core: "rs",
     footer: "nothing",
     modalContent: "nothing",
+    onPlayerTilePress: "nothing",
     selectedCatIds: [],
     tmpCatIds: [],
     numPlayers: 6,
@@ -23,7 +24,7 @@ export const INITIAL_STATE = {
     roundNum: 0,
     result: {},
     showPenalty: false,
-    wordArr: [],
+    wordArr: [],    
 }
 
 class WhoIsSpy extends Component {

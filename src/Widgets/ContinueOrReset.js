@@ -43,10 +43,17 @@ const ContinueOrReset = ({
                 result: {},
                 header: "beforeNextRound",
                 footer: "beforeGuessControls",
-                modalContent: "nextRoundWord",
+                onPlayerTilePress: "nextRoundWord",
             })
 
             dismissModal();
+        })
+    }
+
+    const onResetPress = () => {
+        setGlobalState({
+            modalContent: "confirmReset",
+            modalVisible: true,
         })
     }
 
@@ -55,7 +62,7 @@ const ContinueOrReset = ({
             <Text>ContinueOrReset</Text>
             <DefaultButton
                 title="RESET"
-                onPress={() => {}}
+                onPress={onResetPress}
             />
             <DefaultButton
                 title="CONTINUE"

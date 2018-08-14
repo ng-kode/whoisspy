@@ -1,7 +1,13 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { DefaultModal } from "./CommonUI";
-import { ContinueOrReset, WordThenPhoto, KeywordOrKill, NextRoundWord } from './Widgets';
+import { 
+    ContinueOrReset, 
+    WordThenPhoto, 
+    KeywordOrKill, 
+    NextRoundWord,
+    ConfirmReset
+} from './Widgets';
 
 const Modal = ({
     setGlobalState,
@@ -31,7 +37,12 @@ const Modal = ({
                     setGlobalState={setGlobalState}
                     globalState={globalState}
                     dismissModal={dismissModal}
-                />        
+                />,
+                "confirmReset": <ConfirmReset
+                    setGlobalState={setGlobalState}
+                    globalState={globalState}
+                    dismissModal={dismissModal}
+                />  
             }
         } else {
             const player = players.filter(p => p.id === modalPlayerId)[0];

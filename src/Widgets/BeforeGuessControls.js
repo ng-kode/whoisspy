@@ -14,15 +14,22 @@ const BeforeGuessControls = ({
         setGlobalState({
             header: "nowKilling",
             footer: "guessControls",
-            modalContent: "keywordOrKill"
+            onPlayerTilePress: "keywordOrKill"
         });
+    }
+
+    const onResetPress = () => {
+        setGlobalState({
+            modalContent: "confirmReset",
+            modalVisible: true,
+        })
     }
 
     return (
     <View>
         <DefaultButton
             title="RESET"
-            onPress={() => {}}
+            onPress={onResetPress}
         />
         {showGuess && <DefaultButton
             title="GUESS!"

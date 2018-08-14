@@ -6,7 +6,7 @@ const ShareControls = ({
     setGlobalState,
     globalState,
 }) => {
-    const onPenaltyPress = () => {
+    const onNextPress = () => {
         setGlobalState({
             showPenalty: true,
             header: "penalty",
@@ -22,7 +22,7 @@ const ShareControls = ({
         />
         <DefaultButton
             title="NEXT"
-            onPress={onPenaltyPress}
+            onPress={onNextPress}
         />
     </View>
 )};

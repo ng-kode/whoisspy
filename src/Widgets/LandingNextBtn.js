@@ -59,7 +59,7 @@ const LandingNextBtn = ({
                 header: "takePhoto",
                 core: "playerTiles",
                 footer: "beforeGuessControls",
-                modalContent: "wordThenPhoto"
+                onPlayerTilePress: "wordThenPhoto"
             });
         });
     } 

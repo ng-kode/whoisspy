@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { View } from 'react-native';
-import { DefaultButton } from "./CommonUI";
 import { 
     LandingNextBtn,
     CategoryControls,
@@ -33,7 +32,10 @@ const Footer = ({
                 globalState={globalState}
                 setGlobalState={setGlobalState}
             />,
-            "guessControls": <GuessControls/>,
+            "guessControls": <GuessControls
+                globalState={globalState}
+                setGlobalState={setGlobalState}
+            />,
             "shareControls": <ShareControls
                 setGlobalState={setGlobalState}
                 globalState={globalState}
