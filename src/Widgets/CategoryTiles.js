@@ -16,14 +16,26 @@ const CategoryTiles = ({
                 ? tmpCatIds.filter(catid => catid !== id)
                 : tmpCatIds.concat(id)
         });
-    }    
+    }
+
+    const onAllPress = () => {
+        const allIds = CATEGORY.map(cat => cat.id);
+        setGlobalState({
+            "tmpCatIds": tmpCatIds.length === allIds.length
+                ? []
+                : allIds
+        });
+    }
     
     return (
         <View style={styles.tilesWrapper}>
             {CATEGORY.map((cat, i) => 
                 <TouchableOpacity 
                     key={cat.text}
-                    style={styles.tileContainer}
+                    style={[
+                        styles.tileContainer,
+                        tmpCatIds.includes(cat.id) && styles.selected
+                    ]}
                     onPress={() => onCatTilePress(cat.id)}
                 >
                     <Text>{cat.text}</Text>
@@ -32,8 +44,12 @@ const CategoryTiles = ({
 
             <TouchableOpacity 
                 key="allthecat"
-                style={[styles.tileContainer, styles.lastTile]}
-                onPress={() => {}}
+                style={[
+                    styles.tileContainer, 
+                    styles.lastTile,
+                    tmpCatIds.length === CATEGORY.length && styles.selected
+                ]}
+                onPress={onAllPress}
             >
                 <Text>✌️全部✌️ {JSON.stringify(tmpCatIds)}</Text>
             </TouchableOpacity>
@@ -60,6 +76,9 @@ const styles = StyleSheet.create({
     },
     lastTile: {
         width: "90%"
+    },
+    selected: {
+        backgroundColor: "yellowgreen",
     }
 })
 
