@@ -26,6 +26,7 @@ class WhoIsSpy extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            header: "landing",
             core: "rs",
             footer: "nothing",
             modalContent: "nothing",
@@ -64,7 +65,8 @@ class WhoIsSpy extends Component {
             <View style={styles.container}>
                 <Header 
                     style={styles.headerContainer}
-                    title={JSON.stringify(this.state.result)} 
+                    setGlobalState={(obj, cb) => this.setStateByChild(obj, cb)}
+                    globalState={this.state}
                 />
 
                 <Core

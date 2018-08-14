@@ -12,6 +12,7 @@ const CategoryControls = ({
 
     onOkayPress = () => {
         setGlobalState({
+            header: "landing",
             core: "rs",            
             selectedCatIds: tmpCatIds,
             tmpCatIds: [],
@@ -26,6 +27,7 @@ const CategoryControls = ({
 
     onCancelPress = () => {
         setGlobalState({
+            header: "landing",
             core: "rs",
             footer: "landingNextBtn",
             tmpCatIds: [],

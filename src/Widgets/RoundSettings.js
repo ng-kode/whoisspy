@@ -27,6 +27,7 @@ const RoundSettings = ({
 
     const onSelectCatClick = () => {
         setGlobalState({
+            header: "selectCat",
             core: "cat",
             tmpCatIds: selectedCatIds,
             footer: "categoryControls",

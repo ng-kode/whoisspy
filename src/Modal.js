@@ -64,7 +64,7 @@ const Modal = ({
         if (typeof body === 'undefined') {
             return (
                 <Text style={{fontSize: 24}}>
-                    Plz provide a valid state for "modalContent": 
+                    "{modalContent}" is not a valid state for "modalContent": 
                     enum({`${JSON.stringify(Object.keys(widgets))}`})
                     for modalPlayerId is {modalPlayerId !== null && "not"} null
                 </Text>

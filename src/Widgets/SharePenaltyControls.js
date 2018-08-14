@@ -9,6 +9,7 @@ const SharePenaltyControls = ({
     const onPenaltyPress = () => {
         setGlobalState({
             showPenalty: true,
+            header: "penalty",
             footer: "continueControls",
         })
     }

@@ -56,6 +56,7 @@ const LandingNextBtn = ({
             wordArr
         }, (newState) => {
             setGlobalState({
+                header: "takePhoto",
                 core: "playerTiles",
                 footer: "playerTilesControls",
                 modalContent: "wordThenPhoto"

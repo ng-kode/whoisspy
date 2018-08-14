@@ -50,7 +50,7 @@ const Footer = ({
         if (typeof body === 'undefined') {
             return (
                 <Text style={{fontSize: 24}}>
-                    Plz provide a valid state for "footer": 
+                    "{footer}" is not a valid state for "footer": 
                     enum({`${JSON.stringify(Object.keys(widgets))}`})
                 </Text>
             )

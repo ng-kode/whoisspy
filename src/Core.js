@@ -32,7 +32,7 @@ const Core = ({
         if (typeof body === 'undefined') {
             return (
                 <Text style={{fontSize: 24}}>
-                    Plz provide a valid state for "core": 
+                    "{core}" is not a valid state for "core": 
                     enum({`${JSON.stringify(Object.keys(widgets))}`})
                 </Text>
             )

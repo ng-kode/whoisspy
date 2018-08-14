@@ -12,6 +12,7 @@ const PlayerTilesControls = ({
 
     const onGuessPress = () => {
         setGlobalState({
+            header: "nowKilling",
             footer: "guessControls",
             modalContent: "keywordOrKill"
         });
