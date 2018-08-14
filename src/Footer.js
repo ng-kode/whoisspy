@@ -4,10 +4,10 @@ import { DefaultButton } from "./CommonUI";
 import { 
     LandingNextBtn,
     CategoryControls,
-    PlayerTilesControls,
-    SharePenaltyControls,
+    BeforeGuessControls,
+    ShareControls,
     GuessControls,
-    ContinueControls
+    RoundCompleteControls
 } from "./Widgets";
 
 const Footer = ({
@@ -29,16 +29,16 @@ const Footer = ({
                 setGlobalState={setGlobalState}
                 globalState={globalState}
             />,
-            "playerTilesControls": <PlayerTilesControls
+            "beforeGuessControls": <BeforeGuessControls
                 globalState={globalState}
                 setGlobalState={setGlobalState}
             />,
             "guessControls": <GuessControls/>,
-            "sharePenaltyControls": <SharePenaltyControls
+            "shareControls": <ShareControls
                 setGlobalState={setGlobalState}
                 globalState={globalState}
             />,
-            "continueControls": <ContinueControls
+            "roundCompleteControls": <RoundCompleteControls
                 setGlobalState={setGlobalState}
                 globalState={globalState}
             />,

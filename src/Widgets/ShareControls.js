@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 import { DefaultButton } from "../CommonUI";
 
-const SharePenaltyControls = ({ 
+const ShareControls = ({ 
     setGlobalState,
     globalState,
 }) => {
@@ -10,7 +10,7 @@ const SharePenaltyControls = ({
         setGlobalState({
             showPenalty: true,
             header: "penalty",
-            footer: "continueControls",
+            footer: "roundCompleteControls",
         })
     }
 
@@ -27,4 +27,4 @@ const SharePenaltyControls = ({
     </View>
 )};
 
-export default SharePenaltyControls;
+export default ShareControls;

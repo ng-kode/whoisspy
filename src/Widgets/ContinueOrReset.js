@@ -42,7 +42,7 @@ const ContinueOrReset = ({
                 showPenalty: false,
                 result: {},
                 header: "beforeNextRound",
-                footer: "playerTilesControls",
+                footer: "beforeGuessControls",
                 modalContent: "nextRoundWord",
             })
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { DefaultButton } from "../CommonUI";
 
-const ContinueControls = ({
+const RoundCompleteControls = ({
     globalState,
     setGlobalState
 }) => {
@@ -22,4 +22,4 @@ const ContinueControls = ({
     </View>
 )};
 
-export default ContinueControls;
+export default RoundCompleteControls;

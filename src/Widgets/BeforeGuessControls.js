@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { DefaultButton } from "../CommonUI";
 
-const PlayerTilesControls = ({ 
+const BeforeGuessControls = ({ 
     globalState,
     setGlobalState 
 }) => {
@@ -31,4 +31,4 @@ const PlayerTilesControls = ({
     </View>
 )};
 
-export default PlayerTilesControls;
+export default BeforeGuessControls;

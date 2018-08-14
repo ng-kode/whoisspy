@@ -40,7 +40,7 @@ class KeywordOrKill extends Component {
                     aliveSpies,
                     aliveNorm
                 },
-                footer: "sharePenaltyControls",
+                footer: "shareControls",
             })
         } else if (normWin) {
             setGlobalState({
@@ -49,7 +49,7 @@ class KeywordOrKill extends Component {
                     aliveSpies,
                     aliveNorm
                 },
-                footer: "sharePenaltyControls",
+                footer: "shareControls",
             })
         } else {
             setGlobalState({

@@ -3,12 +3,12 @@ import CategoryTiles from './CategoryTiles'
 import LandingNextBtn from "./LandingNextBtn";
 import CategoryControls from "./CategoryControls";
 import PlayerTiles from "./PlayerTiles";
-import PlayerTilesControls from "./PlayerTilesControls";
+import BeforeGuessControls from "./BeforeGuessControls";
 import WordThenPhoto from "./WordThenPhoto";
 import GuessControls from "./GuessControls";
 import KeywordOrKill from "./KeywordOrKill";
-import SharePenaltyControls from "./SharePenaltyControls";
-import ContinueControls from "./ContinueControls";
+import ShareControls from "./ShareControls";
+import RoundCompleteControls from "./RoundCompleteControls";
 import ContinueOrReset from "./ContinueOrReset";
 import NextRoundWord from "./NextRoundWord";
 
@@ -18,12 +18,12 @@ export {
     LandingNextBtn,
     CategoryControls,
     PlayerTiles,
-    PlayerTilesControls,
+    BeforeGuessControls,
     WordThenPhoto,
     GuessControls,
     KeywordOrKill,
-    SharePenaltyControls,
-    ContinueControls,
+    ShareControls,
+    RoundCompleteControls,
     ContinueOrReset,
     NextRoundWord,
 }

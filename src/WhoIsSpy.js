@@ -4,45 +4,32 @@ import Header from "./Header";
 import Core from "./Core";
 import Footer from "./Footer";
 import Modal from "./Modal";
-import { 
-    RoundSettings, 
-    CategoryTiles, 
-    LandingNextBtn,
-    CategoryControls,
-    PlayerTiles,
-    PlayerTilesControls,
-    WordThenPhoto,
-    GuessControls,
-    KeywordOrKill,
-    SharePenaltyControls,
-    ContinueControls,
-    ContinueOrReset,
-    NextRoundWord,
-} from "./Widgets";
 
 export const DEFAULT_AVATAR = ""
+
+export const INITIAL_STATE = {
+    header: "landing",
+    core: "rs",
+    footer: "nothing",
+    modalContent: "nothing",
+    selectedCatIds: [],
+    tmpCatIds: [],
+    numPlayers: 6,
+    numSpies:  2,
+    players: [],
+    showGuess: false,
+    modalVisible: false,
+    modalPlayerId: null,
+    roundNum: 0,
+    result: {},
+    showPenalty: false,
+    wordArr: [],
+}
 
 class WhoIsSpy extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            header: "landing",
-            core: "rs",
-            footer: "nothing",
-            modalContent: "nothing",
-            selectedCatIds: [],
-            tmpCatIds: [],
-            numPlayers: 6,
-            numSpies:  2,
-            players: [],
-            showGuess: false,
-            modalVisible: false,
-            modalPlayerId: null,
-            roundNum: 0,
-            result: {},
-            showPenalty: false,
-            wordArr: [],
-        }
+        this.state = INITIAL_STATE;
     }
     
     dismissModal = () => {

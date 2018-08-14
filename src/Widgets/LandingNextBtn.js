@@ -58,7 +58,7 @@ const LandingNextBtn = ({
             setGlobalState({
                 header: "takePhoto",
                 core: "playerTiles",
-                footer: "playerTilesControls",
+                footer: "beforeGuessControls",
                 modalContent: "wordThenPhoto"
             });
         });
