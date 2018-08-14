@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Slider, StyleSheet } from 'react-native';
+import { View, Text, Slider, StyleSheet, ToastAndroid } from 'react-native';
 import { DefaultButton, FloatingButton } from '../CommonUI';
 
 const RoundSettings = ({
@@ -11,17 +11,40 @@ const RoundSettings = ({
         numSpies,
         numPlayers, 
         selectedCatIds,
+        toasting,
     } = globalState;
 
+    const doToast = msg => {
+        if (toasting) {
+            return;
+        }
+
+        setGlobalState({ toasting: true })
+        ToastAndroid.show(msg, ToastAndroid.SHORT);
+
+        setTimeout(() => {
+            setGlobalState({ toasting: false });
+        }, 2500);
+    }
+
     const setNumSpies = sign => {
+        const newNumSpies = numSpies + parseInt(sign + 1);
+
+        if (newNumSpies === 0) {
+            return doToast('臥底太少了');
+        } else if (newNumSpies > numPlayers / 2 - 1) {
+            return doToast('臥底太多了');
+        }
+
         setGlobalState({
-            numSpies: numSpies + parseInt(sign + 1)
+            numSpies: newNumSpies
         })
     }
 
     const setNumPlayers = val => {
         setGlobalState({
-            numPlayers: val
+            numPlayers: val,
+            numSpies: Math.round(val / 2 - 1)
         })
     }
 

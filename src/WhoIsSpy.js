@@ -24,7 +24,8 @@ export const INITIAL_STATE = {
     roundNum: 0,
     result: {},
     showPenalty: false,
-    wordArr: [],    
+    wordArr: [],
+    toasting: false,
 }
 
 class WhoIsSpy extends Component {
