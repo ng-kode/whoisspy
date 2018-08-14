@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { DefaultButton } from "../CommonUI";
 import { captureScreen } from "react-native-view-shot";
+import Share from 'react-native-share';
 
 const ShareControls = ({ 
     setGlobalState,
@@ -9,10 +10,21 @@ const ShareControls = ({
 }) => {
 
     const onSharePress = async () => {
-        captureScreen({
+        const url = await captureScreen({
             format: "jpg",
             quality: 0.8
-        }).then(console.log);
+        });
+        console.log(url);
+
+        const options = {
+            url,
+            title: '分享',
+            message: '我正在遊玩誰是臥底!',
+            subject: '我正在遊玩誰是臥底!' //  for email
+        }
+
+        const res = await Share.open(options);
+        console.log(res);
     }
 
     const onNextPress = () => {
