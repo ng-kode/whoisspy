@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Slider, StyleSheet, ToastAndroid } from 'react-native';
 import { DefaultButton, FloatingButton } from '../CommonUI';
+import CAT_GROUPS from "../data/CAT_GROUPS.json"
 
 const RoundSettings = ({
     globalState,
@@ -56,13 +57,20 @@ const RoundSettings = ({
             footer: "categoryControls",
         })
     }
-    
+
+    const selectedCat_str = CAT_GROUPS
+        .filter(obj => selectedCatIds.includes(obj.categoryid))
+        .map(obj => obj.name)
+        .join('，');
+
     return (
     <View>
         <DefaultButton
-            title="選擇種類"
+            title={selectedCatIds.length ? "重選種類" : "選擇種類"}
             onPress={onSelectCatClick}
         />
+        {selectedCatIds.length > 0 
+            && <Text>已選種類：{selectedCat_str}</Text>}
 
         <Text>遊玩人數: {numPlayers}</Text>
         <Slider

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text } from 'react-native';
+import { NowKillingHeader } from "./Widgets";
 
 const Header = ({
     style,
@@ -23,12 +24,10 @@ const Header = ({
             "takePhoto": <Text>
                 一人點擊一張卡牌
             </Text>,
-            "nowKilling": <Text>
-                { result.winner 
-                    ? `${result.winner}贏了！` 
-                    : "輪流描述自己的字詞 -> 選個臥底 -> 按卡殺他/她" 
-                }
-            </Text>,
+            "nowKilling": <NowKillingHeader
+                globalState={globalState}
+                setGlobalState={setGlobalState}
+            />,
             "penalty": <Text>
                 這些玩家要接受懲罰了😈
             </Text>,

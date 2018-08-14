@@ -12,6 +12,7 @@ import RoundCompleteControls from "./RoundCompleteControls";
 import ContinueOrReset from "./ContinueOrReset";
 import NextRoundWord from "./NextRoundWord";
 import ConfirmReset from "./ConfirmReset";
+import NowKillingHeader from "./NowKillingHeader";
 
 export {
     RoundSettings,
@@ -28,4 +29,5 @@ export {
     ContinueOrReset,
     NextRoundWord,
     ConfirmReset,
+    NowKillingHeader
 }
